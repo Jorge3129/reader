@@ -1,3 +1,6 @@
-/scrape/node_modules
+/book-server/node_modules
+/book-server/src/config/db.config.ts
+/book-server/src/.env
+/server/node_modules
 /client/node_modules
 /.idea
