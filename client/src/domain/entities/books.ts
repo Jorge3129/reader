@@ -1,18 +1,37 @@
-export interface Book {
+export interface PartialBook {
     title: string
     author: string
     language: string
-    content: BookSection[]
     category?: string
     id?: string
 }
 
-export interface BookSection {
+export interface PartialBookSection {
     id?: number
     uid?: number
     title: string
     type?: string
+}
+
+export type BookSection = PartialBookSection & {
     content: string
 }
 
-export type BookDescription = Omit<Book, "content">
+export type Book = PartialBook & {
+    content: BookSection[]
+}
+
+export type DeepBookSection = PartialBookSection & {
+    content: string | DeepBookSection[]
+}
+
+export type DeepBook = PartialBook & {
+    content: DeepBookSection[]
+}
+
+export type BookDescription = PartialBook
+
+export type ContentTableSection = DeepBookSection & {
+    path?: number[],
+    depth?: number
+}

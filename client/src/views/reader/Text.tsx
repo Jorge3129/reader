@@ -1,6 +1,6 @@
-import React, {Dispatch, FC, SetStateAction, MouseEvent} from 'react';
+import React, {Dispatch, FC, SetStateAction, MouseEvent, useMemo} from 'react';
 import {PageButton, PageMenu, Paragraph, TextStyle, Word} from "./styles";
-import {useSection} from "../../hooks/useReader";
+import {useSection} from "../../hooks/reader/useSection";
 import {useDictionary} from "../../hooks/useDictionary";
 
 interface IProps {
@@ -12,54 +12,48 @@ interface LineAcc {
     ix: number
 }
 
-
 const Text: FC<IProps> = () => {
 
-    const {chooseSection, section, content} = useSection()
+    const {section, turnPage} = useSection()
     const {searchWord} = useDictionary()
-
-    if (!section) return <TextStyle/>;
-
-    const turnPage = (e: MouseEvent<HTMLButtonElement>, next: boolean) => {
-        if (!content || !section?.uid) return;
-        const index = next ? section.uid + 1 : section.uid - 1;
-        const newSection = content[index];
-        if (!newSection) return;
-        chooseSection(newSection);
-    }
 
     const lineAcc: LineAcc = {arr:[], ix: 0};
 
+    const sectionText = useMemo(() => section && section.content.split("\n\n")
+        .reduce((acc: LineAcc ,p: string, i: number) => {
+            const arr = acc.arr.concat(<> {
+                p.split("\n")
+                    .filter(line => line)
+                    .map((line, lineIx) => <div key={line}>{
+                        line.split(" ")
+                            .map((word, wordIx) => word &&
+                                <>
+                                    <Word onClick={e => searchWord(word)}
+                                          key={word + wordIx}
+                                    >{word}</Word>
+                                    <span> </span>
+                                </>
+                            )
+                    } <b style={{color: "blue"}}>{ (++acc.ix) % 5 === 0 && (acc.ix)}</b></div>)
+            }<br/></>)
+            return {arr, ix: acc.ix}
+        }, lineAcc).arr, [section])
+
+    if (!section) return <TextStyle/>;
+
     return (
         <TextStyle>
-            <h2>{section.title}</h2>
-            <ul>
-                {section.content.split("\n\n")
-                    .reduce((acc: LineAcc ,p: string, i: number) => {
-                        const arr = acc.arr.concat(<> {
-                                p.split("\n")
-                                    .filter(line => line)
-                                    .map((line, lineIx) => <div key={line}>{
-                                        line.split(" ")
-                                            .map((word, wordIx) => word &&
-                                                <Word onClick={e => searchWord(word)}
-                                                      key={word + wordIx}
-                                                >{word}</Word>)
-                                    } <b style={{color: "blue"}}>{ (++acc.ix) % 5 === 0 && (acc.ix)}</b></div>)
-                            }<br/></>)
-
-                        return {
-                            arr,
-                            ix: acc.ix
-                        }
-                    }, lineAcc).arr
-                }
-            </ul>
-            <PageMenu>
-                <PageButton onClick={e => turnPage(e, false)}>&lt; Prev</PageButton>
-                <PageButton onClick={e => turnPage(e, true)}>Next &gt;</PageButton>
-                <PageButton onClick={e => navigator.clipboard.writeText(section.content)}>Copy</PageButton>
-            </PageMenu>
+            <div className="container">
+                <h2>{section.title}</h2>
+                <ul>
+                    {sectionText}
+                </ul>
+                <PageMenu>
+                    <PageButton onClick={e => turnPage(false)}>&lt; Prev</PageButton>
+                    <PageButton onClick={e => turnPage(true)}>Next &gt;</PageButton>
+                    <PageButton onClick={e => navigator.clipboard.writeText(section.content)}>Copy</PageButton>
+                </PageMenu>
+            </div>
         </TextStyle>
     );
 };

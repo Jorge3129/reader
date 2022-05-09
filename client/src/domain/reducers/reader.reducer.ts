@@ -1,24 +1,29 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {Book, BookDescription, BookSection} from "../entities/books";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {Book, BookDescription, BookSection, DeepBook, DeepBookSection} from "../entities/books";
 import {RootState} from "../store/store";
+import {firstSectionPath, flattenDeepBookContent, formatStructure} from "../entities/book.utils";
 
 interface IBookState {
-    bookDescription?: BookDescription
+    chosenBook?: BookDescription
+    bookId?: string
     content?: BookSection[]
+    structure?: DeepBookSection[]
     section?: BookSection
     loading: boolean
+    path: number[]
 }
 
 const initialState: IBookState = {
-    loading: false
+    loading: false,
+    path: []
 }
 
 const readerSlice = createSlice({
     name: "reader",
     initialState,
     reducers: {
-        setBook: (state, {payload}) => {
-            state.bookDescription = payload
+        setChosenBook: (state, {payload}) => {
+            state.chosenBook = payload
         },
         setLoading: (state, {payload}) => {
             state.loading = payload
@@ -29,9 +34,22 @@ const readerSlice = createSlice({
         setContent: (state, {payload}) => {
             state.content = payload
         },
+        setStructure: (state, {payload}) => {
+            state.structure = payload
+        },
+        setPath: (state, {payload}) => {
+            state.path = payload
+        },
+        setBook: (state, {payload: book}: PayloadAction<DeepBook>) => {
+            const {content} = book;
+            state.content = flattenDeepBookContent(content)
+            state.structure = formatStructure(content)
+            state.path = firstSectionPath(content)
+            state.bookId = book.id
+        },
     }
 })
 
 export const selectReader = (state: RootState) => state.reader
-export const {setBook, setSection, setLoading, setContent} = readerSlice.actions
-export const readerReducer  = readerSlice.reducer
+export const {setChosenBook, setSection, setLoading, setContent, setStructure, setBook, setPath} = readerSlice.actions
+export const readerReducer = readerSlice.reducer

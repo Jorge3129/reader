@@ -9,7 +9,6 @@ interface IProps {
 const Dictionary:FC<IProps> = () => {
 
     const {result, loading} = useDictionary()
-
     const entries = result && result.map(entry => <DictEntry key={entry.id} entry={entry}/>)
 
     return (

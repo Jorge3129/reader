@@ -21,8 +21,12 @@ export const ContentTableStyle = styled.section`
     width: 100%;
     overflow: scroll;
   }
+  
+  & .section_list {
+    padding: 0 0.5rem;
+  }
 
-  & li:hover {
+  & .text_section:hover {
     color: white;
     cursor: pointer;
   }
@@ -33,7 +37,6 @@ export const Paragraph = styled.li`
 `
 
 export const Word = styled.span`
-  padding: 0 0.15rem;
   border-radius: 0.2rem;
 
   &:hover {
@@ -46,6 +49,14 @@ export const Word = styled.span`
 export const TextStyle = styled.section`
   flex-grow: 1;
   position: relative;
+  max-height: 100vh - 5rem;
+
+  & .container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+  }
 `
 
 export const PageButton = styled.button`

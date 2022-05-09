@@ -1,20 +1,22 @@
 import {ObjectId} from "mongodb";
 import {collections} from "./database.service";
 
-export class BookService {
-     static async findOneBook(id: string) {
+class BookDbService {
+    async findOneBook(id: string) {
         const query = { _id: new ObjectId(id) };
         // @ts-ignore
         return await collections.books.findOne(query)
     }
 
-    static async findAllBooks() {
+    async findAllBooks() {
         // @ts-ignore
         return await collections.books.find({}).toArray()
     }
 
-    static async findAllBookDescriptions() {
+    async findAllBookDescriptions() {
         // @ts-ignore
         return await collections.books.find({}).project({content: 0}).toArray()
     }
 }
+
+export default new BookDbService()

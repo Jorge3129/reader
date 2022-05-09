@@ -5,7 +5,7 @@ import path from "path";
 export const collections: { books?: Collection } = {}
 
 export async function connectToDatabase() {
-    const envPath = (path.join(__dirname, "../.env"))
+    const envPath = (path.join(__dirname, "../../.env"))
     console.log(dotenv.config({path: envPath}))
     const client: MongoClient = new MongoClient(process.env.DB_CONN_STRING || "");
     await client.connect();
