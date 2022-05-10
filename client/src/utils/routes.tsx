@@ -5,5 +5,5 @@ import Books from "../views/books/Books";
 export const routes = [
     {title: "Home", path: '/', component: <Home/>},
     {title: "Books", path: '/books', component: <Books/>},
-    {title: "Reader", path: '/reader', component: <Reader/>},
+    {title: "Reader", path: '/reader/:bookIdParam', component: <Reader/>},
 ]

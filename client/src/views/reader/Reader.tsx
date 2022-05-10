@@ -1,11 +1,15 @@
 import Main from "../page/Main";
 import {ReaderContent} from "./styles";
-import ContentTable from "./ContentTable";
+import ContentTable from "./content-table/ContentTable";
 import Text from "./Text";
 import Tools from "./Tools";
 import {useFetchOneBook} from "../../hooks/reader/useFetchOneBook";
+import {FC} from "react";
 
-const Reader = () => {
+interface IProps {
+}
+
+const Reader:FC<IProps> = () => {
 
     useFetchOneBook()
 

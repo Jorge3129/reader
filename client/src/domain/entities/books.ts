@@ -19,7 +19,7 @@ export type BookSection = PartialBookSection & {
 
 export type Book = PartialBook & {
     content: BookSection[]
-}
+} & {[key: string] : string}
 
 export type DeepBookSection = PartialBookSection & {
     content: string | DeepBookSection[]

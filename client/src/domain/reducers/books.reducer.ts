@@ -4,7 +4,7 @@ import {RootState} from "../store/store";
 
 interface IBookState {
     books: Book[],
-    loading: boolean
+    loading: boolean,
 }
 
 const initialState: IBookState = {

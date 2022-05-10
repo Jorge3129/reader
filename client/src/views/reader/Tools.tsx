@@ -1,6 +1,6 @@
 import React from 'react';
 import {ToolStyle} from "./styles";
-import Dictionary from "./Dictionary";
+import Dictionary from "./dictionary/Dictionary";
 
 const Tools = () => {
     return (

@@ -4,7 +4,7 @@ import Header from "../page/Header";
 import {routes} from "../../utils/routes";
 import {GlobalStyles} from "./globalStyles";
 import Footer from "../page/Footer";
-import {useFetchBooks} from "../../hooks/useBooks";
+import {useFetchBooks} from "../../hooks/books/useBooks";
 
 function App() {
 

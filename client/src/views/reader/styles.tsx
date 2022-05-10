@@ -9,29 +9,6 @@ export const ReaderContent = styled.div`
   align-items: stretch;
 `
 
-export const ContentTableStyle = styled.section`
-  background-color: darkgrey;
-  position: relative;
-  width: 10rem;
-  max-height: 100vh - 5rem;
-
-  & .container {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    overflow: scroll;
-  }
-  
-  & .section_list {
-    padding: 0 0.5rem;
-  }
-
-  & .text_section:hover {
-    color: white;
-    cursor: pointer;
-  }
-`
-
 export const Paragraph = styled.li`
   margin: 1rem;
 `

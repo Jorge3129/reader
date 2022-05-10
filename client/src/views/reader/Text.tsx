@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction, MouseEvent, useMemo} from 'react';
+import React, {Dispatch, FC, SetStateAction, KeyboardEvent, useMemo, useEffect} from 'react';
 import {PageButton, PageMenu, Paragraph, TextStyle, Word} from "./styles";
 import {useSection} from "../../hooks/reader/useSection";
 import {useDictionary} from "../../hooks/useDictionary";
@@ -17,10 +17,10 @@ const Text: FC<IProps> = () => {
     const {section, turnPage} = useSection()
     const {searchWord} = useDictionary()
 
-    const lineAcc: LineAcc = {arr:[], ix: 0};
+    const lineAcc: LineAcc = {arr: [], ix: 0};
 
     const sectionText = useMemo(() => section && section.content.split("\n\n")
-        .reduce((acc: LineAcc ,p: string, i: number) => {
+        .reduce((acc: LineAcc, p: string, i: number) => {
             const arr = acc.arr.concat(<> {
                 p.split("\n")
                     .filter(line => line)
@@ -34,7 +34,7 @@ const Text: FC<IProps> = () => {
                                     <span> </span>
                                 </>
                             )
-                    } <b style={{color: "blue"}}>{ (++acc.ix) % 5 === 0 && (acc.ix)}</b></div>)
+                    } <b style={{color: "blue"}}>{(++acc.ix) % 5 === 0 && (acc.ix)}</b></div>)
             }<br/></>)
             return {arr, ix: acc.ix}
         }, lineAcc).arr, [section])
@@ -43,7 +43,7 @@ const Text: FC<IProps> = () => {
 
     return (
         <TextStyle>
-            <div className="container">
+            <div>
                 <h2>{section.title}</h2>
                 <ul>
                     {sectionText}

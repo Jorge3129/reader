@@ -1,5 +1,5 @@
 import {Book, BookSection} from "./book";
-import {mockOdes} from "../scrape/mocks/horace";
+import {mockOdes} from "../scrape/mocks/mock-odes";
 
 export const sectionReducer = (array: BookSection[], section: BookSection): BookSection[] => {
     if (typeof section.content === "string") return array.concat([section])

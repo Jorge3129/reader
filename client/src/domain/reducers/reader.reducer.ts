@@ -1,13 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Book, BookDescription, BookSection, DeepBook, DeepBookSection} from "../entities/books";
+import {Book, BookDescription, BookSection, ContentTableSection, DeepBook, DeepBookSection} from "../entities/books";
 import {RootState} from "../store/store";
 import {firstSectionPath, flattenDeepBookContent, formatStructure} from "../entities/book.utils";
 
 interface IBookState {
     chosenBook?: BookDescription
     bookId?: string
-    content?: BookSection[]
-    structure?: DeepBookSection[]
+    content?: ContentTableSection[]
+    structure?: ContentTableSection[]
     section?: BookSection
     loading: boolean
     path: number[]
@@ -42,8 +42,9 @@ const readerSlice = createSlice({
         },
         setBook: (state, {payload: book}: PayloadAction<DeepBook>) => {
             const {content} = book;
-            state.content = flattenDeepBookContent(content)
-            state.structure = formatStructure(content)
+            const structure = formatStructure(content);
+            state.content = flattenDeepBookContent(structure)
+            state.structure = structure
             state.path = firstSectionPath(content)
             state.bookId = book.id
         },

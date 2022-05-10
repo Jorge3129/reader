@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
-import {DictEntryStyle} from "./dictStyles";
-import {Word} from "../../domain/entities/words";
+import {DictEntryStyle} from "./styles";
+import {Word} from "../../../domain/entities/words";
 
 interface IProps {
     entry: Word
