@@ -4,12 +4,15 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.ts"
+    "test": "jest",
+    "dev": "nodemon src/index.ts",
+    "start": "node src/index.js",
+    "postinstall": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tsconfig/node16": "^1.0.2",
     "@types/express": "^4.17.13",
     "@types/puppeteer": "^5.4.6",
     "argon2": "^0.28.5",
