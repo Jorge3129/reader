@@ -1,10 +1,11 @@
 import express, {Request, Response} from 'express'
 import {collections, connectToDatabase} from "./services/db/database.service";
-import {bookRouter} from "./routes/bookRouter";
+import {bookRouter} from "./routes/book.router";
 import {horace} from "./scrape/mocks/horace";
 import {formatBook, flattenBookContent, formatFlatBook} from "./models/book.utils";
 import {mockOdes} from "./scrape/mocks/mock-odes";
 import {mockOdes2} from "./scrape/mocks/mock-odes-2";
+import {userRouter} from "./routes/user.router";
 
 const cors = require('cors')
 const app = express()
@@ -15,6 +16,7 @@ app.use(cors({
 }));
 
 app.use("/books", bookRouter);
+app.use("/auth", userRouter);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 connectToDatabase()

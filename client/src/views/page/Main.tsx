@@ -1,17 +1,15 @@
-import {Content, MainStyled} from "./styles";
-import {FC, PropsWithChildren} from "react";
+import React, {FC} from 'react';
+import styled from "styled-components";
 
-interface IProps {
-    title?: string
-    content?: boolean
-}
+const MainWrap = styled.main`
+  flex-grow: 1;
+`
 
-const Main: FC<PropsWithChildren<IProps>> = ({title, children}) => {
+const Main:FC<React.PropsWithChildren<any>> = ({children}) => {
     return (
-        <MainStyled>
-            {title && <h2 className={title}>{title}</h2>}
-            <Content>{children}</Content>
-        </MainStyled>
+        <MainWrap>
+            {children}
+        </MainWrap>
     );
 };
 

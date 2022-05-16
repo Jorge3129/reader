@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Book, BookDescription, BookSection, ContentTableSection, DeepBook, DeepBookSection} from "../entities/books";
 import {RootState} from "../store/store";
-import {firstSectionPath, flattenDeepBookContent, formatStructure} from "../entities/book.utils";
+import {firstSectionPath, flattenDeepBookContent, formatStructure, formatToShallowArray} from "../entities/book.utils";
 
 interface IBookState {
     chosenBook?: BookDescription
@@ -43,7 +43,7 @@ const readerSlice = createSlice({
         setBook: (state, {payload: book}: PayloadAction<DeepBook>) => {
             const {content} = book;
             const structure = formatStructure(content);
-            state.content = flattenDeepBookContent(structure)
+            state.content = formatToShallowArray(structure)
             state.structure = structure
             state.path = firstSectionPath(content)
             state.bookId = book.id

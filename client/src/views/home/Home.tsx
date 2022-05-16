@@ -1,10 +1,10 @@
-import Main from "../page/Main";
+import MainContent from "../page/MainContent";
 
 const Home = () => {
     return (
-        <Main title="Home">
+        <MainContent title="Home">
             HOME
-        </Main>
+        </MainContent>
     );
 };
 

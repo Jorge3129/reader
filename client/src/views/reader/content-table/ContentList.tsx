@@ -5,13 +5,14 @@ import ContentSection from "./ContentSection";
 
 interface IProps {
     structure: ContentTableSection[]
+    topLevel?: boolean
 }
 
-const ContentList: FC<IProps> = ({structure}) => {
+const ContentList: FC<IProps> = ({structure, topLevel}) => {
 
     const {path} = useSection()
 
-    return <ul className="section_list">
+    return <ul className={"section_list" + (topLevel ? " top_level_list" : "")}>
         {structure.map(section =>
             <ContentSection
                 key={section.depth + "" + section.path}

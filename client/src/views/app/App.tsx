@@ -1,28 +1,35 @@
 import React from 'react';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Header from "../page/Header";
-import {routes} from "../../utils/routes";
 import {GlobalStyles} from "./globalStyles";
 import Footer from "../page/Footer";
-import {useFetchBooks} from "../../hooks/books/useBooks";
+import Reader from "../reader/Reader";
+import Home from "../home/Home";
+import Books from "../books/Books";
+import Private from "../auth/Private";
+import AuthPage from "../auth/AuthPage";
+import Main from "../page/Main";
 
 function App() {
 
     return (
         <BrowserRouter>
-            <>
-                <GlobalStyles/>
-                <Header/>
+            <GlobalStyles/>
+            <Header/>
+            <Main>
                 <Routes>
-                    {routes.map(route =>
-                        <Route path={route.path}
-                               element={route.component}
-                               key={route.path}
-                        />
-                    )}
+                    <Route index element={<Home/>}/>
+                    <Route path={"/login"} element={<AuthPage/>}/>
+                    <Route path={"/books"} element={<Private><Books/></Private>}/>
+                    <Route path={"/reader"}>
+                        <Route path={""} element={<Private><Reader/></Private>}/>
+                        <Route path={":bookIdParam"} element={<Reader/>}/>
+                        <Route path={":bookIdParam/:sectionId"} element={<Reader/>}/>
+                    </Route>
+                    <Route path="*" element={<div>404</div>}/>
                 </Routes>
-                <Footer/>
-            </>
+            </Main>
+            <Footer/>
         </BrowserRouter>
     );
 }

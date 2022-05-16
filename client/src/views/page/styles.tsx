@@ -15,11 +15,15 @@ export const HeaderStyled = styled.header`
   }
 `
 
-export const MainStyled = styled.main`
+export const MainStyled = styled.div`
   width: 100%;
-  flex-grow: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  
+  & .main_title{
+    text-align: center;
+  }
 `
 
 export const Content = styled.div`

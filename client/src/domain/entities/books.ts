@@ -15,11 +15,13 @@ export interface PartialBookSection {
 
 export type BookSection = PartialBookSection & {
     content: string
+    first?: boolean
+    last?: boolean
 }
 
 export type Book = PartialBook & {
     content: BookSection[]
-} & {[key: string] : string}
+} & {[key: string] : any}
 
 export type DeepBookSection = PartialBookSection & {
     content: string | DeepBookSection[]

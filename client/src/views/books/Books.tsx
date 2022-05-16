@@ -1,4 +1,4 @@
-import Main from "../page/Main";
+import MainContent from "../page/MainContent";
 import {useBooks, useFetchBooks} from "../../hooks/books/useBooks";
 import {useState} from "react";
 import BookTable from "./BookTable";
@@ -11,7 +11,7 @@ const Books = () => {
 
     useFetchBooks()
     const {editedBooks, sort, chooseSort} = useSortFilterBooks()
-    const {loading, chooseBook} = useBooks()
+    const {loading} = useBooks()
     const [mode, setMode] = useState("table")
 
     const bookList = loading ? <h1>Loading...</h1> :
@@ -22,12 +22,12 @@ const Books = () => {
         </div>)
 
     return (
-        <Main title="Books">
+        <MainContent title="Books">
             <select onChange={(e) => setMode(e.target.value)}>
                 {modes.map(mode => <option key={mode} value={mode}>{mode}</option> )}
             </select>
             {mode === "list" ? bookList : <BookTable sort={sort} setSort={chooseSort} books={editedBooks}/>}
-        </Main>
+        </MainContent>
     );
 };
 

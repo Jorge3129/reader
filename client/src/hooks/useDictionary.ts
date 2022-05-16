@@ -1,5 +1,4 @@
 import {useAppDispatch, useAppSelector} from "../domain/store/hooks";
-import {selectBooks} from "../domain/reducers/books.reducer";
 import {selectWord} from "../domain/reducers/word.reducer";
 import {wordThunk} from "../domain/reducers/word.thunk";
 

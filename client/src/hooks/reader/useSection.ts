@@ -4,15 +4,11 @@ import {selectReader, setPath, setSection} from "../../domain/reducers/reader.re
 import {ContentTableSection} from "../../domain/entities/books";
 import {sectionIsOpen} from "../../domain/entities/section.utils";
 import {useEffect} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 
 export const useSection = () => {
     const dispatch = useAppDispatch()
     const {content, section} = useAppSelector(selectReader)
-
-    const chooseSection = (section: ContentTableSection) => {
-        if (section.path) dispatch(setPath(section.path))
-        dispatch(setSection(section))
-    }
 
     const choosePath = (section: ContentTableSection, path: number[]) => {
         if (sectionIsOpen(section, path)) {
@@ -23,35 +19,27 @@ export const useSection = () => {
         } else dispatch(setPath(section.path))
     }
 
-    const chooseSectionById = (uid: number) => {
-        if (!content) return;
-        const section = content?.find(s => s.uid === uid)
-        if (section) chooseSection(section)
-    }
-
-    const turnPage = (next: boolean) => {
-        if (!content || !section?.uid) return;
-        const index = next ? section.uid + 1 : section.uid - 1;
-        const newSection = content[index];
-        if (newSection) chooseSection(newSection);
-    }
-
     useEffect(() => {
         window.removeEventListener('onkeydown', handleKey)
         window.onkeydown = handleKey
     }, [content, section])
 
+    const navigate = useNavigate()
+    const {bookIdParam} = useParams()
+
     const handleKey = (e: any) => {
-        console.log(e.key)
-        if (e.key === "ArrowLeft") turnPage(false)
-        if (e.key === "ArrowRight") turnPage(true)
+        const step = chooseStep(e.key)
+        if (!content || section?.uid === undefined) return;
+        const newId = section.uid + step;
+        if (!content[newId]) return;
+        navigate(`/reader/${bookIdParam}/${newId}`)
     }
+
+    const chooseStep = (key: string) =>
+        key === "ArrowLeft" ? -1 : key === "ArrowRight" ? 1 : 0
 
     return {
         ...useSelector(selectReader),
         choosePath,
-        chooseSection,
-        chooseSectionById,
-        turnPage
     }
 }

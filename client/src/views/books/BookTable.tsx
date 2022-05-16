@@ -1,7 +1,9 @@
-import React, {FC} from 'react';
-import {Book} from "../../domain/entities/books";
+import React, {FC, MouseEvent} from 'react';
+import {Book, BookDescription} from "../../domain/entities/books";
 import {TableStyles, BookLink} from "./styles";
 import {SortOption} from "../../domain/entities/other";
+import {useAppDispatch} from "../../domain/store/hooks";
+import {setChosenBook} from "../../domain/reducers/reader.reducer";
 
 interface IProps {
     books: Book[]
@@ -13,13 +15,21 @@ const fields = ["title", "author", "category", "language"]
 
 const BookTable: FC<IProps> = ({books, sort, setSort}) => {
 
+    const dispatch = useAppDispatch();
+
+    const onClick = (e: MouseEvent, book: BookDescription) => {
+        dispatch(setChosenBook(book))
+    }
+
     const rows = books.map(
-        ({title, author, category, language, id}) =>
-            <tr key={id}>
-                <td><BookLink to={'/reader/' + id}>{title}</BookLink></td>
-                <td>{author}</td>
-                <td>{category}</td>
-                <td>{language}</td>
+        book =>
+            <tr key={book.id}>
+                <td onClick={e => onClick(e, book)}>
+                    <BookLink to={'/reader/' + book.id + '/0'}>{book.title}</BookLink>
+                </td>
+                <td>{book.author}</td>
+                <td>{book.category}</td>
+                <td>{book.language}</td>
             </tr>
     )
 

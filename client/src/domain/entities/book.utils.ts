@@ -6,7 +6,16 @@ export const sectionReducer = (array: DeepBookSection[], section: DeepBookSectio
 }
 
 export const flattenDeepBookContent = (content: DeepBookSection[]): BookSection[] => {
-    return content.reduce(sectionReducer, []) as BookSection[]
+    return (content.reduce(sectionReducer, [])) as BookSection[]
+}
+
+export const formatToShallowArray = (content: DeepBookSection[]): BookSection[] => {
+    return addFirstAndLast(flattenDeepBookContent(content));
+}
+
+export const addFirstAndLast = (content: BookSection[]) => {
+    return content.map((s, i, {length}) =>
+        i === 0 ? {...s, first: true} : ((i === length - 1) ? {...s, last: true} : s))
 }
 
 export const formatStructure = (structure: ContentTableSection[], depth = 0, path: number[] = []): ContentTableSection[] => {

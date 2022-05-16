@@ -1,7 +1,8 @@
-import React, {Dispatch, FC, SetStateAction, KeyboardEvent, useMemo, useEffect} from 'react';
-import {PageButton, PageMenu, Paragraph, TextStyle, Word} from "./styles";
-import {useSection} from "../../hooks/reader/useSection";
-import {useDictionary} from "../../hooks/useDictionary";
+import React, {FC, useMemo} from 'react';
+import {PageButton, PageMenu, TextStyle, Word} from "./styles";
+import {useSection} from "../../../hooks/reader/useSection";
+import {useDictionary} from "../../../hooks/useDictionary";
+import SectionLink from "../content-table/SectionLink";
 
 interface IProps {
 
@@ -14,7 +15,7 @@ interface LineAcc {
 
 const Text: FC<IProps> = () => {
 
-    const {section, turnPage} = useSection()
+    const {section} = useSection()
     const {searchWord} = useDictionary()
 
     const lineAcc: LineAcc = {arr: [], ix: 0};
@@ -43,14 +44,14 @@ const Text: FC<IProps> = () => {
 
     return (
         <TextStyle>
-            <div>
+            <div className="container">
                 <h2>{section.title}</h2>
                 <ul>
                     {sectionText}
                 </ul>
                 <PageMenu>
-                    <PageButton onClick={e => turnPage(false)}>&lt; Prev</PageButton>
-                    <PageButton onClick={e => turnPage(true)}>Next &gt;</PageButton>
+                    {!section.first && <SectionLink className={"next_section_link"} section={section} step={-1}>&lt; Prev</SectionLink>}
+                    {!section.last && <SectionLink className={"next_section_link"} section={section} step={1}>Next &gt;</SectionLink>}
                     <PageButton onClick={e => navigator.clipboard.writeText(section.content)}>Copy</PageButton>
                 </PageMenu>
             </div>
