@@ -1,7 +1,7 @@
 
 # The Reader App
 
-This is an app to faciliatate reading books in foreign languages
+This is an app to facilitate reading books in foreign languages
 
 See the app live: [https://the-reader-xd.herokuapp.com](https://the-reader-xd.herokuapp.com)
 
