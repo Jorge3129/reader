@@ -7,6 +7,10 @@ See the app live: [https://the-reader-xd.herokuapp.com](https://the-reader-xd.he
 
 The app server: [https://the-reader-xd-server.herokuapp.com](https://the-reader-xd-server.herokuapp.com)
 
+#### API routes:
+
+GET /books  
+GET /books/:id
 
 ### Scripts
 
