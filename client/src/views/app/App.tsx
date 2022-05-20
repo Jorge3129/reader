@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Header from "../page/Header";
 import {GlobalStyles} from "./globalStyles";
@@ -7,10 +7,14 @@ import Reader from "../reader/Reader";
 import Home from "../home/Home";
 import Books from "../books/Books";
 import Private from "../auth/Private";
-import AuthPage from "../auth/AuthPage";
+import LoginPage from "../auth/LoginPage";
 import Main from "../page/Main";
+import SignupPage from "../auth/SignupPage";
+import {useCheckUser} from "../../hooks/auth/useCheckUser";
 
 function App() {
+
+    useCheckUser()
 
     return (
         <BrowserRouter>
@@ -19,12 +23,13 @@ function App() {
             <Main>
                 <Routes>
                     <Route index element={<Home/>}/>
-                    <Route path={"/login"} element={<AuthPage/>}/>
+                    <Route path={"/login"} element={<LoginPage/>}/>
+                    <Route path={"/signup"} element={<SignupPage/>}/>
                     <Route path={"/books"} element={<Private><Books/></Private>}/>
                     <Route path={"/reader"}>
                         <Route path={""} element={<Private><Reader/></Private>}/>
-                        <Route path={":bookIdParam"} element={<Reader/>}/>
-                        <Route path={":bookIdParam/:sectionId"} element={<Reader/>}/>
+                        <Route path={":bookIdParam"} element={<Private><Reader/></Private>}/>
+                        <Route path={":bookIdParam/:sectionId"} element={<Private><Reader/></Private>}/>
                     </Route>
                     <Route path="*" element={<div>404</div>}/>
                 </Routes>

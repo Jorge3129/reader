@@ -9,6 +9,7 @@ const chooseAuthor = (author: string) => async (page: Page) => {
             .filter(item => item.textContent === search)
             .map(item => item.getAttribute("href")),
         author)
+    // @ts-ignore
     return link[0] || "";
 }
 
@@ -40,6 +41,7 @@ const scrapeBook = async (page: Page, link: string) => {
 const exec = (author: string, book: number) => async (page: Page) => {
     const authorLink = await chooseAuthor(author)(page);
     const bookLinks = await chooseBook(page, authorLink)
+    // @ts-ignore
     return await scrapeBook(page, bookLinks[book] || "")
 }
 

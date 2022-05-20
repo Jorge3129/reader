@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import DictEntry from "./DictEntry";
-import {useDictionary} from "../../../hooks/useDictionary";
+import {useDictionary} from "../../../hooks/reader/useDictionary";
 
 interface IProps {
 

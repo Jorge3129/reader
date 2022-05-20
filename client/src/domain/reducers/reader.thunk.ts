@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {setBook, setContent, setLoading, setSection, setStructure} from "./reader.reducer";
-import {BookApi} from "../../services/book.api";
+import {setBook, setLoading, setSection} from "./reader.reducer";
+import {BookApi} from "../../api/book.api";
 
 export const readerThunk = createAsyncThunk("books/get",
     async (id: string, thunkApi) => {

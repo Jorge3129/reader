@@ -1,11 +1,8 @@
 import {useAppDispatch, useAppSelector} from "../../domain/store/hooks";
 import {useEffect, useMemo, useState} from "react";
-import {FilterOption, SortOption} from "../../domain/entities/other";
-import books from "../../views/books/Books";
+import {FilterOption, SortOption} from "../../domain/types";
 import _ from "lodash"
 import {selectBooks} from "../../domain/reducers/books.reducer";
-import {Book} from "../../domain/entities/books";
-
 
 export const useSortFilterBooks = () => {
     const {books} = useAppSelector(selectBooks)

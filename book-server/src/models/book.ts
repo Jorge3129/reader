@@ -1,6 +1,6 @@
-import { ObjectId } from "mongodb";
+import {Document, ObjectId} from "mongodb";
 
-export interface PartialBook {
+export interface PartialBook extends Document {
     title: string
     author: string
     language: string
@@ -8,7 +8,7 @@ export interface PartialBook {
     id?: ObjectId
 }
 
-export interface PartialBookSection {
+export interface PartialBookSection extends Document {
     id?: number
     uid?: number
     title: string

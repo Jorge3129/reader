@@ -1,16 +1,10 @@
-import {MouseEvent} from 'react';
 import {routes} from "../../utils/routes";
 import {HeaderStyled, LinkStyled, NavStyled} from "./styles";
-import {useAppDispatch, useAppSelector} from "../../domain/store/hooks";
-import {selectUser, setUser, toggleUser} from "../../domain/reducers/user.reducer";
+import {useAuth} from "../../hooks/auth/useAuth";
 
 const Header = () => {
 
-    const {user} = useAppSelector(selectUser)
-    const dispatch = useAppDispatch()
-    const logout = (e: MouseEvent<HTMLButtonElement>) => {
-        dispatch(setUser(false))
-    }
+    const {user, logOut} = useAuth()
 
     return (
         <HeaderStyled>
@@ -20,7 +14,7 @@ const Header = () => {
                     <LinkStyled className="link" to={route.path} key={route.path}>
                         <span>{route.title}</span>
                     </LinkStyled>)}
-                {user && <button onClick={logout}>Logout</button>}
+                {user && <button onClick={logOut}>Logout</button>}
             </NavStyled>
         </HeaderStyled>
     );

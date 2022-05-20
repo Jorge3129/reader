@@ -1,7 +1,13 @@
 import express from "express";
 import {BookController} from "../controllers/book.controller";
-export const bookRouter = express.Router();
+import {IDBService} from "../db/db.types";
 
-bookRouter.get('/', BookController.getAllBooks)
-bookRouter.get('/descriptions', BookController.getBookDescriptions)
-bookRouter.get('/:id', BookController.getBookById)
+export const getBookRouter = (db: IDBService) => {
+    const bookRouter = express.Router();
+    const controller = new BookController(db.books)
+    bookRouter.get('/', controller.getAllBooks.bind(controller))
+    bookRouter.get('/descriptions', controller.getBookDescriptions.bind(controller))
+    bookRouter.get('/:id', controller.getBookById.bind(controller))
+    return bookRouter;
+}
+

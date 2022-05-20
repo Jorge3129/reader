@@ -1,6 +1,11 @@
 import express from "express";
 import {UserController} from "../controllers/user.controller";
-export const userRouter = express.Router();
+import {IDBService} from "../db/db.types";
 
-userRouter.get('/login', UserController.login)
-userRouter.get('/register', UserController.register)
+export const getUserRouter = (db: IDBService) => {
+    const userRouter = express.Router();
+    const controller = new UserController(db.users)
+    userRouter.post('/login', controller.login.bind(controller))
+    userRouter.post('/register', controller.register.bind(controller))
+    return userRouter;
+}

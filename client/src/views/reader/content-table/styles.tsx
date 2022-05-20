@@ -25,6 +25,10 @@ export const ContentTableStyle = styled.section`
   & .section_list.top_level_list {
     padding: 0.5rem;
   }
+  
+  @media screen and (max-width: 600px) {
+    width: 5rem;
+  } 
 `
 
 export const BookTitleStyle = styled.div`

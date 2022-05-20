@@ -1,7 +1,7 @@
 import React, {FC, useMemo} from 'react';
 import {PageButton, PageMenu, TextStyle, Word} from "./styles";
 import {useSection} from "../../../hooks/reader/useSection";
-import {useDictionary} from "../../../hooks/useDictionary";
+import {useDictionary} from "../../../hooks/reader/useDictionary";
 import SectionLink from "../content-table/SectionLink";
 
 interface IProps {

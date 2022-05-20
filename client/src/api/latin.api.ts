@@ -1,6 +1,5 @@
-import axios from "axios";
-
-export const LATIN_API = "https://www.latin-is-simple.com/api/"
+import {httpClient} from "./http.client";
+import {LATIN_API} from "../constants/api";
 
 export class LatinApi {
     static query (word: string) {
@@ -9,7 +8,7 @@ export class LatinApi {
 
     static async queryWord(word: string){
         try {
-            const res = await axios.get(LatinApi.query(word));
+            const res = await httpClient.get(LatinApi.query(word));
             return res.data;
         } catch (e) {
             return []

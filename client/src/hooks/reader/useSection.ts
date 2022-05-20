@@ -5,6 +5,7 @@ import {ContentTableSection} from "../../domain/entities/books";
 import {sectionIsOpen} from "../../domain/entities/section.utils";
 import {useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
+import {keyboard} from "../../constants/keyboard"
 
 export const useSection = () => {
     const dispatch = useAppDispatch()
@@ -35,8 +36,13 @@ export const useSection = () => {
         navigate(`/reader/${bookIdParam}/${newId}`)
     }
 
-    const chooseStep = (key: string) =>
-        key === "ArrowLeft" ? -1 : key === "ArrowRight" ? 1 : 0
+    const chooseStep = (key: string): number => {
+        const map = {
+            [keyboard.ARROW_RIGHT]: 1,
+            [keyboard.ARROW_LEFT]: -1,
+        }
+        return map[key] || 0;
+    }
 
     return {
         ...useSelector(selectReader),

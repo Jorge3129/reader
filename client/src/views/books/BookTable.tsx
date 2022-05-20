@@ -1,7 +1,7 @@
 import React, {FC, MouseEvent} from 'react';
 import {Book, BookDescription} from "../../domain/entities/books";
 import {TableStyles, BookLink} from "./styles";
-import {SortOption} from "../../domain/entities/other";
+import {SortOption} from "../../domain/types";
 import {useAppDispatch} from "../../domain/store/hooks";
 import {setChosenBook} from "../../domain/reducers/reader.reducer";
 
