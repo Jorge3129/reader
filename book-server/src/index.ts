@@ -1,3 +1,4 @@
+console.log(require('dotenv').config({path: './src/.env'}))
 import express from 'express'
 import {DBFactory} from "./db";
 import {horace} from "./scrape/mocks/horace";
@@ -5,7 +6,6 @@ import {formatBook} from "./models/book.utils";
 import {mockOdes} from "./scrape/mocks/mock-odes";
 import {mockOdes2} from "./scrape/mocks/mock-odes-2";
 import {RootRouter} from "./routes/root.router";
-
 const cors = require('cors')
 const app = express()
 const PORT = 9000;

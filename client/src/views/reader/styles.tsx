@@ -12,5 +12,5 @@ export const ReaderContent = styled.div`
 export const ToolStyle = styled.section`
   width: 30%;
   justify-self: flex-end;
-  background-color: darkgrey;
+  background-color: ${props => props.theme.sidebarBg};
 `

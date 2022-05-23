@@ -35,7 +35,7 @@ export const ContentSectionLi = styled.li.attrs((props: IProps) => ({
   }
   
   & .content_link {
-    color: black;
+    color: ${props => props.theme.color};
     text-decoration: none;
     flex: 1;
     padding: 0.1rem 0.3rem;

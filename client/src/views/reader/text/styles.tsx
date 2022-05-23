@@ -10,6 +10,8 @@ export const TextStyle = styled.section`
     height: 100%;
     width: 100%;
     overflow-y: scroll;
+    color: ${props => props.theme.color};
+    background-color: ${props => props.theme.background};
   }
 `
 

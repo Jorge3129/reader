@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContentTableStyle = styled.section`
-  background-color: lightgray;
+  background-color: ${props => props.theme.sidebarBg};
   position: relative;
   width: 10rem;
   max-height: 100vh - 5rem;

@@ -20,6 +20,8 @@ export const MainStyled = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  color: ${props => props.theme.color};
+  background-color: ${props => props.theme.background};
   
   & .main_title{
     text-align: center;

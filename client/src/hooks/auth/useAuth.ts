@@ -3,7 +3,6 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {selectUser, setUser} from "../../domain/reducers/user.reducer";
 import {LoginResponse, LoginValues} from "../../domain/types";
 import {authService} from "../../services/auth/auth.service";
-import {removeFromStorage} from "../../services/browser/storage";
 
 export const useAuth = () => {
     const dispatch = useAppDispatch()
@@ -15,7 +14,7 @@ export const useAuth = () => {
     const from = location.state?.from?.pathname || "/";
 
     const logIn = async (values: LoginValues): Promise<LoginResponse | void> => {
-        const res = await authService.logIn(values);
+        const res = await authService.login(values);
         if (!res.user) return res;
         dispatch(setUser(res.user))
         navigate(from, {replace: true});

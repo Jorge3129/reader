@@ -1,6 +1,7 @@
 import {routes} from "../../utils/routes";
 import {HeaderStyled, LinkStyled, NavStyled} from "./styles";
 import {useAuth} from "../../hooks/auth/useAuth";
+import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
 
@@ -15,6 +16,7 @@ const Header = () => {
                         <span>{route.title}</span>
                     </LinkStyled>)}
                 {user && <button onClick={logOut}>Logout</button>}
+                <ThemeSwitch/>
             </NavStyled>
         </HeaderStyled>
     );

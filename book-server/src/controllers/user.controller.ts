@@ -1,56 +1,64 @@
-import {Request, Response} from "express";
-import argon2 from "argon2";
+import {Request, Response, NextFunction} from "express";
 import {IUserRepo} from "../db/db.types";
 import {User} from "../models/user";
-import {Null} from "../models/type.utils";
+import {UserService} from "../services/user.service";
 
 export class UserController {
 
-    constructor(public userService: IUserRepo) {}
+    constructor(public userRepo: IUserRepo, public userService: UserService) {}
 
-    async register(req: Request, res: Response) {
+    async register(req: Request, res: Response, next: NextFunction) {
         try {
-            console.log("REGISTER")
             const reqUser: User = req.body;
-            // check if exists
-            if (await this.userService.exists(reqUser))
-                return res.status(404).send({message: `User with email ${reqUser.email} already exists`});
-            // hash password
-            const hashed = await argon2.hash(reqUser.password)
-            const result = await this.userService.insertOne({...reqUser, password: hashed});
-            res.status(200).json({success: true, result})
-        } catch (error) {
-            console.log(error)
-            res.status(404).json({message: `Unable to find matching document with id: ${req.params.id}`});
+            const userData = await this.userService.register(reqUser);
+            res.cookie('refreshToken', userData.refreshToken,
+                {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            return res.json(userData)
+        } catch (e) {
+            next(e)
         }
     }
 
-    async login(req: Request, res: Response) {
+    async login(req: Request, res: Response, next: NextFunction) {
         try {
-            console.log("LOGIN")
-            const {loginUser} = req.body;
-            if (!loginUser) throw new Error()
-            const {email, password} = loginUser;
-            const user: Null<User> = await this.userService.getOneByEmail(email);
-            // email doesn't exist
-            if (!user) return res.status(404).send({message: `No user with email ${email}`});
-            // verify password
-            if (await argon2.verify(user.password, password)) {
-                res.json({success: true, user: {user, password: undefined}})
-            } else {
-                res.status(404).json({message: "Incorrect password"})
-            }
-        } catch (error) {
-            console.log(error)
-            res.status(404).json({message: `Unable to find matching document with id: ${req.params.id}`});
+            const {email, password} = req.body;
+            const userData = await this.userService.login({email, password});
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            return res.json(userData);
+        } catch (e) {
+            next(e)
         }
     }
 
-    async logout(req: Request, res: Response) {
+    async logout(req: Request, res: Response, next: NextFunction) {
         try {
+            const {refreshToken} = req.cookies;
+            const token = await this.userService.logout(refreshToken);
+            res.clearCookie('refreshToken');
+            return res.json(token);
+        } catch (e) {
+            next(e)
+        }
+    }
 
-        } catch (error) {
-            res.status(404).json({message: `Unable to find matching document with id: ${req.params.id}`});
+    async activate(req: Request, res: Response, next: NextFunction) {
+        try {
+            const activationLink = req.params.link;
+            await this.userService.activate(activationLink);
+            return res.redirect(process.env.CLIENT_URL || "/");
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async refresh(req: Request, res: Response, next: NextFunction) {
+        try {
+            const {refreshToken} = req.cookies;
+            const userData = await this.userService.refresh(refreshToken);
+            res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+            return res.json(userData);
+        } catch (e) {
+            next(e);
         }
     }
 }
