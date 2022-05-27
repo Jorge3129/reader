@@ -5,34 +5,29 @@ import Text from "./text/Text";
 import Tools from "./Tools";
 import {useFetchOneBook} from "../../hooks/reader/useFetchOneBook";
 import {FC} from "react";
-import {useAppSelector} from "../../domain/store/hooks";
-import {selectReader} from "../../domain/reducers/reader.reducer";
-import {Navigate} from "react-router-dom";
+import {useKeyNavigation} from "../../hooks/reader/useKeyNavigation";
+import {useSaveRecent} from "../../hooks/reader/useSaveRecent";
 
 interface IProps {
 }
 
 const Reader: FC<IProps> = () => {
 
+    useSaveRecent()
+    useKeyNavigation()
     const {loading} = useFetchOneBook()
 
-    if (loading) return <h2>LOADING...</h2>
+    if (loading) return <MainContent>
+        <h2>LOADING...</h2>
+    </MainContent>
 
     return (
-        <MainContent>
-            <ReaderContent>
-                <ContentTable/>
-                <Text/>
-                <Tools/>
-            </ReaderContent>
-        </MainContent>
+        <ReaderContent>
+            <ContentTable/>
+            <Text/>
+            <Tools/>
+        </ReaderContent>
     );
 };
-
-export const RedirectReader = () => {
-    const {bookId, section} = useAppSelector(selectReader)
-    const a = `/reader/${bookId}/${section?.uid || 0}`;
-    return <Navigate to={a}/>
-}
 
 export default Reader;

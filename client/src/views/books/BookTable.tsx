@@ -1,9 +1,10 @@
 import React, {FC, MouseEvent} from 'react';
 import {Book, BookDescription} from "../../domain/entities/books";
-import {TableStyles, BookLink} from "./styles";
+import {TableStyles} from "./styles";
 import {SortOption} from "../../domain/types";
 import {useAppDispatch} from "../../domain/store/hooks";
 import {setChosenBook} from "../../domain/reducers/reader.reducer";
+import {StyledLink} from "../reusable/StyledLink";
 
 interface IProps {
     books: Book[]
@@ -25,7 +26,7 @@ const BookTable: FC<IProps> = ({books, sort, setSort}) => {
         book =>
             <tr key={book.id}>
                 <td onClick={e => onClick(e, book)}>
-                    <BookLink to={'/reader/' + book.id + '/0'}>{book.title}</BookLink>
+                    <StyledLink to={'/reader/' + book.id + '/0'}>{book.title}</StyledLink>
                 </td>
                 <td>{book.author}</td>
                 <td>{book.category}</td>

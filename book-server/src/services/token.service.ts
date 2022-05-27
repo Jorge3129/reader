@@ -34,10 +34,10 @@ export class TokenService {
     async saveToken(userId: ObjectId, refreshToken: string) {
         const tokenData = await this.tokenRepo.findOne({user: userId})
         if (tokenData) {
-            await this.tokenRepo.updateOne({_id: new ObjectId(tokenData._id)}, {refreshToken})
+            await this.tokenRepo.updateOne({_id: tokenData._id}, {refreshToken})
             return {...tokenData, refreshToken};
         }
-        return ({user: userId, refreshToken})
+        return await this.tokenRepo.create({user: userId, refreshToken});
     }
 
     async removeToken(refreshToken: string) {

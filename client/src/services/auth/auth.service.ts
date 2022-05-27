@@ -1,19 +1,17 @@
 import {LoginResponse, LoginValues} from "../../domain/types";
 import AuthApi from "../../api/auth.api"
 import {removeFromStorage, saveToStorage} from "../browser/storage";
+import {AuthResponse} from "../../domain/entities/auth";
 
 class AuthService {
-    async login(data: LoginValues): Promise<LoginResponse> {
+    async login(data: LoginValues): Promise<AuthResponse> {
         const result = await AuthApi.login(data);
-        if (result.success) {
-            saveToStorage("user", result.user)
-            return result;
-        }
+        saveToStorage('token', result.accessToken)
         return result;
     }
 
     async signup(data: LoginValues): Promise<LoginResponse> {
-        const result = await AuthApi.login(data);
+        const result = await AuthApi.signup(data);
         if (result.success) {
             saveToStorage("user", result.user)
             return result;
@@ -22,7 +20,7 @@ class AuthService {
     }
 
     async logOut(): Promise<any> {
-        removeFromStorage('user')
+        removeFromStorage('token')
     }
 }
 

@@ -1,0 +1,19 @@
+POST http://localhost:9000/tools/words/628c10917c520a60e89b274b
+Content-Type: application/json
+
+{
+  "word":     {
+    "id": 7568,
+    "intern_type": "noun",
+    "short_name": "curriculum",
+    "full_name": "curriculum, curriculi [n.] O",
+    "type": { "name": "noun", "label": "Noun" },
+    "translations_unstructured": {
+      "en": "act of running, race, lap, track, chariot, course of action/heavenly bodies",
+      "de": "Laufring, übergreifende Kante, Rennpiste, Sichelwagen, Rennen, Piste, Kampfwagen, Wettlauf, Feldweg, Kulissenwagen, Gerinne, Bahngleis, Streitwagen, Wettrennen, Bahnstrecke, Triumphwagen, Wettfahrt, Bettbahn"
+    },
+    "url": "https://www.latin-is-simple.com/en/vocabulary/noun/7568/"
+  }
+
+
+}

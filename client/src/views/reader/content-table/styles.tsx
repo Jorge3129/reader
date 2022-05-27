@@ -6,9 +6,15 @@ export const ContentTableStyle = styled.section`
   width: 10rem;
   max-height: 100vh - 5rem;
   font-family: "Times New Roman", sans-serif;
+  transition: width 0.5s ease;
+  
+  &.closed {
+    width: 0;
+  }
 
   & .container {
     position: absolute;
+    right: 0;
     height: 100%;
     width: 100%;
     display: flex;
@@ -16,6 +22,11 @@ export const ContentTableStyle = styled.section`
     justify-content: stretch;
     align-items: stretch;
     overflow-y: scroll;
+    transition: all 0.5s ease;
+  }
+
+  &.closed .container {
+    //transform: translateX(-100%);
   }
 
   & .section_list {
@@ -40,5 +51,18 @@ export const BookTitleStyle = styled.div`
     padding: 0.5rem;
     font-size: 1.4rem;
     font-weight: bold;
+  }
+`
+
+export const Close = styled.div`
+  position: absolute;
+  top: 0;
+  right: -2rem;
+  background-color: ${props => props.theme.sidebarBg};
+  z-index: 2;
+  
+  &:hover {
+    cursor: pointer;
+    color: red;
   }
 `

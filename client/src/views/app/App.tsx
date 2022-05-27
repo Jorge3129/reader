@@ -11,6 +11,8 @@ import LoginPage from "../auth/LoginPage";
 import Main from "../page/Main";
 import SignupPage from "../auth/SignupPage";
 import {useCheckUser} from "../../hooks/auth/useCheckUser";
+import Vocabulary from "../vocabulary/Vocabulary";
+import ReaderRecent from "../reader/ReaderRecent";
 
 function App() {
 
@@ -27,10 +29,11 @@ function App() {
                     <Route path={"/signup"} element={<SignupPage/>}/>
                     <Route path={"/books"} element={<Private><Books/></Private>}/>
                     <Route path={"/reader"}>
-                        <Route path={""} element={<Private><Reader/></Private>}/>
+                        <Route path={""} element={<Private><ReaderRecent/></Private>}/>
                         <Route path={":bookIdParam"} element={<Private><Reader/></Private>}/>
                         <Route path={":bookIdParam/:sectionId"} element={<Private><Reader/></Private>}/>
                     </Route>
+                    <Route path={"/vocabulary"} element={<Private><Vocabulary/></Private>}/>
                     <Route path="*" element={<div>404</div>}/>
                 </Routes>
             </Main>

@@ -10,6 +10,8 @@ const chooseAuthor = (author: string) => async (page: Page) => {
             .map(item => item.getAttribute("href")),
         author)
     // @ts-ignore
+    console.log(link[0])
+    // @ts-ignore
     return link[0] || "";
 }
 
@@ -40,9 +42,23 @@ const scrapeBook = async (page: Page, link: string) => {
 
 const exec = (author: string, book: number) => async (page: Page) => {
     const authorLink = await chooseAuthor(author)(page);
-    const bookLinks = await chooseBook(page, authorLink)
+    const bookLinksHandle = await chooseBook(page, authorLink)
     // @ts-ignore
-    return await scrapeBook(page, bookLinks[book] || "")
+    return await scrapeBook(page, bookLinksHandle[book] || "")
+}
+
+const execMany = (author: string, limit: number) => async (page: Page) => {
+    const authorLink = await chooseAuthor(author)(page);
+    const bookLinksHandle = await chooseBook(page, authorLink)
+    const bookLinks = bookLinksHandle.toString().split(',')
+    const res = []
+    for (const book of bookLinks) {
+        const scraped = await scrapeBook(page, book)
+        //console.log(book, scraped)
+        res.push(scraped)
+    }
+    return res
 }
 
 export const scrape  = async (author: string, book: number) => await launch(URL, exec(author, book))
+export const scrapeMany  = async (author: string, limit: number) => await launch(URL, execMany(author, limit))

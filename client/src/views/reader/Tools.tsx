@@ -5,7 +5,6 @@ import Dictionary from "./dictionary/Dictionary";
 const Tools = () => {
     return (
         <ToolStyle>
-            <h3>Tools</h3>
             <Dictionary/>
         </ToolStyle>
     );

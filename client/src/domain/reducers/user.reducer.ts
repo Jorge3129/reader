@@ -5,9 +5,10 @@ import {Null} from "../types";
 
 interface UserState {
     user: Null<User>
+    loading: boolean
 }
 
-const initialState: UserState = { user: null}
+const initialState: UserState = { user: null, loading: false}
 
 const userSlice = createSlice({
     name: "user",
@@ -16,9 +17,12 @@ const userSlice = createSlice({
         setUser: (state, {payload}: PayloadAction<Null<User>>) => {
             state.user = payload
         },
+        setLoading: (state, {payload}: PayloadAction<boolean>) => {
+            state.loading = payload
+        },
     }
 })
 
-export const {setUser} = userSlice.actions
+export const {setUser, setLoading} = userSlice.actions
 export const userReducer = userSlice.reducer
 export const selectUser = (state: RootState) => state.user

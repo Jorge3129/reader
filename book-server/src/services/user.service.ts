@@ -5,6 +5,7 @@ import {Null} from "../models/type.utils";
 import {ApiError} from "../exceptions/api-error";
 import {UserDto} from "../dtos/user.dto";
 import mailService from './mail.service'
+import {ObjectId} from "mongodb";
 
 const uuid = require('uuid')
 
@@ -57,10 +58,10 @@ export class UserService {
         }
         const userData = this.tokenService.validateRefreshToken(refreshToken);
         const tokenFromDb = await this.tokenService.findToken(refreshToken);
-        if (!userData || !tokenFromDb) {
-            throw ApiError.UnauthorizedError();
-        }
-        const user = await this.userRepo.findOne({_id: userData.id});
+        console.log(userData, tokenFromDb && tokenFromDb.refreshToken.slice(-5), refreshToken.slice(-5))
+        if (!userData || !tokenFromDb) throw ApiError.UnauthorizedError();
+        console.log("\nSUCCESS\n")
+        const user = await this.userRepo.findOne({_id: new ObjectId(userData.id)});
         if (!user) throw new Error('Server error: no user by id')
         const userDto = new UserDto(user);
         const tokens = this.tokenService.generateTokens({...userDto});

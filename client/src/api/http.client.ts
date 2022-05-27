@@ -23,7 +23,7 @@ client.interceptors.response.use((config) => {
     if (error.response.status == 401 && error.config && !error.config._isRetry) {
         originalRequest._isRetry = true;
         try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true})
+            const response = await axios.get<AuthResponse>(`${API_URL}/auth/refresh`, {withCredentials: true})
             saveToStorage('token', response.data.accessToken);
             return client.request(originalRequest);
         } catch (e) {
@@ -34,12 +34,16 @@ client.interceptors.response.use((config) => {
 })
 
 class HttpClient {
-    async get<T = any>(url: string) {
-        return await client.get<T>(url);
+    async get<T = any>(url: string, config?: AxiosRequestConfig) {
+        return await client.get<T>(url, config);
     }
 
     async post<T = any>(url: string, data: any) {
         return await client.post<T>(url, data);
+    }
+
+    async delete<T = any>(url: string, config?: AxiosRequestConfig) {
+        return await client.delete<T>(url, config);
     }
 }
 

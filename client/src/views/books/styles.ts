@@ -25,6 +25,4 @@ export const TableStyles = styled.table`
   }
 `
 
-export const BookLink = styled(Link)`
-    
-`
+TableStyles.displayName = 'TableStyles'

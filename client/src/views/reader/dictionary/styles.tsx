@@ -1,15 +1,38 @@
 import styled from "styled-components";
+import {AddButton, DeleteButton} from "../../reusable/CopyButton";
+
+
+export const DictStyle = styled.div`
+  
+    & .dict_title {
+      padding: 0.5rem 0;
+      text-align: center;
+    }
+`
 
 export const DictEntryStyle = styled.div`
   
   margin: 1rem;
+  padding: 0.5rem;
   word-break: break-word;
+  position: relative;
+  background-color: ${props => props.theme.background};
+  border-radius: 0.3rem;
 
   & .word_type {
     color: blue;
   }
+`
+DictEntryStyle.displayName = 'DictEntryStyle'
 
-  & .word_type {
-    color: blue;
-  }
+export const AddButtonWrap = styled(AddButton)`
+  position: absolute;
+  top: 0;
+  right: 0;
+`
+
+export const DeleteButtonWrap = styled(DeleteButton)`
+  position: absolute;
+  top: 0;
+  right: 1rem;
 `

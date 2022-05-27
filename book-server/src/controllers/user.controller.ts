@@ -1,11 +1,10 @@
 import {Request, Response, NextFunction} from "express";
-import {IUserRepo} from "../db/db.types";
 import {User} from "../models/user";
 import {UserService} from "../services/user.service";
 
 export class UserController {
 
-    constructor(public userRepo: IUserRepo, public userService: UserService) {}
+    constructor(public userService: UserService) {}
 
     async register(req: Request, res: Response, next: NextFunction) {
         try {
@@ -54,6 +53,8 @@ export class UserController {
     async refresh(req: Request, res: Response, next: NextFunction) {
         try {
             const {refreshToken} = req.cookies;
+            console.log("REFRESH")
+            console.log(refreshToken)
             const userData = await this.userService.refresh(refreshToken);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData);

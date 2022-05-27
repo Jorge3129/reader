@@ -1,58 +1,57 @@
-import React, {FC, useMemo} from 'react';
-import {PageButton, PageMenu, TextStyle, Word} from "./styles";
+import React, {FC, useEffect, useMemo, useRef, useState} from 'react';
+import {PageMenu, TextStyle, Word} from "./styles";
 import {useSection} from "../../../hooks/reader/useSection";
 import {useDictionary} from "../../../hooks/reader/useDictionary";
 import SectionLink from "../content-table/SectionLink";
+import CopyButton from "../../reusable/CopyButton";
+import SectionText from "./SectionText";
 
 interface IProps {
 
 }
 
-interface LineAcc {
-    arr: JSX.Element[],
-    ix: number
-}
-
 const Text: FC<IProps> = () => {
 
     const {section} = useSection()
-    const {searchWord} = useDictionary()
+    const [page, setPage] = useState<number>(0)
+    const scrollRef = useRef<HTMLDivElement>(null)
 
-    const lineAcc: LineAcc = {arr: [], ix: 0};
+    useEffect(() => {
+        setPage(0)
+        if (scrollRef.current) scrollRef.current.scrollTo({top: 0})
+    }, [section])
 
-    const sectionText = useMemo(() => section && section.content.split("\n\n")
-        .reduce((acc: LineAcc, p: string, i: number) => {
-            const arr = acc.arr.concat(<> {
-                p.split("\n")
-                    .filter(line => line)
-                    .map((line, lineIx) => <div key={line}>{
-                        line.split(" ")
-                            .map((word, wordIx) => word &&
-                                <>
-                                    <Word onClick={e => searchWord(word)}
-                                          key={word + wordIx}
-                                    >{word}</Word>
-                                    <span> </span>
-                                </>
-                            )
-                    } <b style={{color: "blue"}}>{(++acc.ix) % 5 === 0 && (acc.ix)}</b></div>)
-            }<br/></>)
-            return {arr, ix: acc.ix}
-        }, lineAcc).arr, [section])
+
+    const sectionTextPage = useMemo(() => {
+        return section && section.content
+            .split('\n')
+            .slice(0, 50 * (page + 1))
+            .join('\n')
+    }, [section, page])
+
+
+    const onScroll = () => {
+        if (!scrollRef?.current) return;
+        const el = scrollRef.current;
+        if (el.scrollHeight - el.scrollTop - el.clientHeight < 1) setPage(page + 1)
+    }
 
     if (!section) return <TextStyle/>;
 
     return (
         <TextStyle>
-            <div className="container">
-                <h2>{section.title}</h2>
-                <ul>
-                    {sectionText}
-                </ul>
+            <div className="container" ref={scrollRef} onScroll={onScroll}>
+                <h2 className="section_title">{section.title}</h2>
+                <SectionText sectionTextPage={sectionTextPage}/>
                 <PageMenu>
-                    {!section.first && <SectionLink className={"next_section_link"} section={section} step={-1}>&lt; Prev</SectionLink>}
-                    {!section.last && <SectionLink className={"next_section_link"} section={section} step={1}>Next &gt;</SectionLink>}
-                    <PageButton onClick={e => navigator.clipboard.writeText(section.content)}>Copy</PageButton>
+                    {!section.first && <SectionLink className={"next_section_link"} section={section}
+                                                    step={-1}>&lt; Prev</SectionLink>}
+                    {!section.last &&
+                        <SectionLink className={"next_section_link"} section={section} step={1}>Next &gt;</SectionLink>}
+                    <CopyButton onClick={async e => {
+                        await navigator.clipboard.writeText(section.content)
+                        alert(`Copied to clipboard: \n"${section.content.slice(0, 30)}..."`)
+                    }}/>
                 </PageMenu>
             </div>
         </TextStyle>

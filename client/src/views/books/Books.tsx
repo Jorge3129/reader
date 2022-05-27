@@ -3,7 +3,7 @@ import {useBooks, useFetchBooks} from "../../hooks/books/useBooks";
 import {useState} from "react";
 import BookTable from "./BookTable";
 import {useSortFilterBooks} from "../../hooks/books/useSortFilterBooks";
-import {BookLink} from "./styles";
+import {StyledLink} from "../reusable/StyledLink";
 
 const modes = ["table", "list" ]
 
@@ -17,7 +17,7 @@ const Books = () => {
     const bookList = loading ? <h1>Loading...</h1> :
         editedBooks.map(book =>
         <div key={book.id}>
-            <h4><BookLink to={'/reader/' + book.id}>{book.title}</BookLink></h4>
+            <h4><StyledLink to={'/reader/' + book.id}>{book.title}</StyledLink></h4>
             <div>by {book.author}</div>
         </div>)
 

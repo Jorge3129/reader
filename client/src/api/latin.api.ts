@@ -1,5 +1,5 @@
 import {httpClient} from "./http.client";
-import {LATIN_API} from "../constants/api";
+import {BOOK_SERVER_URL, LATIN_API} from "../constants/api";
 
 export class LatinApi {
     static query (word: string) {
@@ -8,7 +8,8 @@ export class LatinApi {
 
     static async queryWord(word: string){
         try {
-            const res = await httpClient.get(LatinApi.query(word));
+            //const res = await httpClient.get(LatinApi.query(word));
+             const res = await httpClient.get(BOOK_SERVER_URL + '/lang/word/' + word);
             return res.data;
         } catch (e) {
             return []

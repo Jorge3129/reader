@@ -1,4 +1,4 @@
-import {Book, BookSection} from "./book";
+import {Book, BookSection, FlatBookSection} from "./book";
 import {mockOdes} from "../scrape/mocks/mock-odes";
 
 export const sectionReducer = (array: BookSection[], section: BookSection): BookSection[] => {
@@ -6,8 +6,8 @@ export const sectionReducer = (array: BookSection[], section: BookSection): Book
     return array.concat(flattenBookContent(section.content))
 }
 
-export const flattenBookContent = (content: BookSection[]) => {
-    return content.reduce(sectionReducer, [])
+export const flattenBookContent = (content: BookSection[]): FlatBookSection[] => {
+    return content.reduce(sectionReducer, []) as FlatBookSection[]
 }
 
 export const provideUids = (content: BookSection[]) => {
@@ -21,8 +21,9 @@ export const provideUids = (content: BookSection[]) => {
 export const formatBook = (book: Book) => {
     const {content} = book
     let uid = 0
-    flattenBookContent(content).map((section: BookSection) => {
+    flattenBookContent(content).map((section: FlatBookSection) => {
         section.uid = uid++;
+        section.content = section.content.replace(/^[\n\r]*/g, '')
         return section;
     })
     return {...book, content};

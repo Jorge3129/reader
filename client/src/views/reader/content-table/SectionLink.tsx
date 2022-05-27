@@ -1,6 +1,7 @@
 import React, {FC, PropsWithChildren} from 'react';
 import {ContentTableSection} from "../../../domain/entities/books";
 import {NavLink, useParams, To} from "react-router-dom";
+import {StyledLink} from "../../reusable/StyledLink";
 
 interface LinkProps {
     section: ContentTableSection
@@ -22,7 +23,7 @@ const SectionLink: FC<PropsWithChildren<LinkProps>> =
      }) => {
         const {bookIdParam} = useParams();
         const link = generateUrl(bookIdParam || "", section.uid || 0, step)
-        return <NavLink to={link} className={className || ""}>{children}</NavLink>
+        return <StyledLink to={link} className={className || ""}>{children}</StyledLink>
     };
 
 export default SectionLink;

@@ -1,7 +1,8 @@
-import React, {FC, useMemo} from 'react';
-import {BookTitleStyle, ContentTableStyle} from "./styles";
+import React, {FC, useMemo, useState, MouseEvent} from 'react';
+import {BookTitleStyle, Close, ContentTableStyle} from "./styles";
 import {useSection} from "../../../hooks/reader/useSection";
 import ContentList from "./ContentList";
+import {useFixWidth} from "../../../hooks/reader/useFixWidth";
 
 interface IProps {
 }
@@ -9,16 +10,25 @@ interface IProps {
 const ContentTable: FC<IProps> = () => {
 
     const {structure, path, chosenBook} = useSection()
+    const [showTable, setShowTable] = useState(true)
+    const {containerRef, onClose} = useFixWidth()
+
+    const onClick = (e: MouseEvent<HTMLDivElement>) => {
+        //onClose(showTable);
+        setShowTable(!showTable);
+    }
 
     const structuredContents = useMemo(() => {
         return structure && <ContentList topLevel structure={structure}/>
     }, [structure, path])
 
     return (
-        <ContentTableStyle>
-            <div className="container">
+        <ContentTableStyle className={showTable ? "" : "closed"}>
+            <Close onClick={onClick}>X</Close>
+            <div className="container" ref={containerRef}>
                 <BookTitleStyle className="book_title_container">
-                    <span className="book_title">{chosenBook?.title || ""}</span>
+                    <div className="book_title">{chosenBook?.title || ""}</div>
+                    <div className="book_author">{chosenBook?.author || ""}</div>
                 </BookTitleStyle>
                 {structuredContents}
             </div>

@@ -1,4 +1,5 @@
 export const saveToStorage = (key: string, data: any) => {
+    if (data === undefined) throw new Error('Data undefined')
     window.localStorage.setItem(key, JSON.stringify(data));
 };
 

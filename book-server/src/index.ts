@@ -1,30 +1,27 @@
-console.log(require('dotenv').config({path: './src/.env'}))
+import langController from "./controllers/lang.controller";
+require('dotenv').config({path: './src/.env'})
 import express from 'express'
-import {DBFactory} from "./db";
-import {horace} from "./scrape/mocks/horace";
-import {formatBook} from "./models/book.utils";
-import {mockOdes} from "./scrape/mocks/mock-odes";
-import {mockOdes2} from "./scrape/mocks/mock-odes-2";
+import {DBFactory, initBooks} from "./db";
 import {RootRouter} from "./routes/root.router";
+import errorMiddleware from "./middlewares/error-middleware";
 const cors = require('cors')
 const app = express()
 const PORT = 9000;
-
-app.use(cors({
-    origin: "*"
-}));
+const cookieParser = require('cookie-parser')
 
 app.use(express.json())
+app.use(cookieParser())
+app.use(cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL
+}));
+app.get('/lang/word/:word', langController.getTranslation.bind(langController))
 
 DBFactory.connect()
     .then(async (DBService) => {
-        await DBService.books.deleteAll()
-        await DBService.books.insertOne(formatBook(horace[0]))
-        await DBService.books.insertOne(formatBook(mockOdes))
-        const result = await DBService.books.insertOne(formatBook(mockOdes2))
-        console.log(result)
-
+        await initBooks(DBService)
         app.use(RootRouter.getRouter(DBService))
+        app.use(errorMiddleware)
 
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
