@@ -7,6 +7,7 @@ import {selectUser} from "../../domain/reducers/user.reducer";
 import {StyledLink} from "../reusable/StyledLink";
 import {BookDescription} from "../../domain/entities/books";
 import {useRedirectReader} from "../../hooks/reader/useRedirectReader";
+import {DictEntryStyle} from "./dictionary/styles";
 
 interface IProps {
 }
@@ -33,13 +34,13 @@ const ReaderRecent: FC<IProps> = () => {
 
     return (
         <Content>
-            <ul>
-                {books.map(b => <div>
+            <ul>{books.map(b =>
+                <DictEntryStyle>
                     <StyledLink to={b.id + '/0'}>
                         <span style={{color: "blue"}}>{b.title}</span>
                     </StyledLink>
-                    <span> by {b.author} </span>
-                </div>)}
+                    <div> by {b.author} </div>
+                </DictEntryStyle>)}
             </ul>
         </Content>
     );

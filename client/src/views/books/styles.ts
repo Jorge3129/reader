@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
-
 
 export const TableStyles = styled.table`
   border-collapse: collapse;
@@ -16,13 +14,34 @@ export const TableStyles = styled.table`
     background-color: #ddd;
   }
 
-  & tr:nth-child(even){
+  & tr:nth-child(even) {
     background-color: ${props => props.theme.tableEvenRow};
   }
-  
+
   & tr:hover {
     background-color: #ddd;
   }
 `
 
 TableStyles.displayName = 'TableStyles'
+
+
+export const PageList = styled.ul`
+  display: flex;
+  flex-direction: row;
+  margin: 0.5rem;
+
+  & .page_list_item {
+    color: ${props => props.theme.background};
+    background-color: ${props => props.theme.color};
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.5rem;
+  }
+
+  & .page_list_item:hover {
+    cursor: pointer;
+    background-color: ${props => props.theme.lighterBg};
+  }
+`
+
+PageList.displayName = 'PageList'

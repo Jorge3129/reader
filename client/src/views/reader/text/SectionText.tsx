@@ -2,9 +2,14 @@ import React, {FC, useMemo} from 'react';
 import {LineStyled, TextList, Word} from "./styles";
 import {useDictionary} from "../../../hooks/reader/useDictionary";
 
+interface ParAcc {
+    parArr: JSX.Element[],
+    parIx: number
+}
+
 interface LineAcc {
-    arr: JSX.Element[],
-    ix: number
+    lineArr: JSX.Element[],
+    lineIx: number
 }
 
 interface IProps {
@@ -15,17 +20,18 @@ const SectionText: FC<IProps> = ({sectionTextPage}) => {
 
     const {searchWord} = useDictionary()
 
-    const lineAcc: LineAcc = {arr: [], ix: 0};
+    const parAcc: ParAcc = {parArr: [], parIx: 1};
+    // const lineAcc: LineAcc = {lineArr: [], lineIx: 1};
 
     const sectionText = useMemo(() => sectionTextPage &&
-        sectionTextPage.replace(/\s\s\s\s/g, '\n&nbsp;')
+        sectionTextPage
+            .replace(/\s{4,6}/g, '\n&nbsp; ')
             .split(/\n\n/g)
-            .reduce((acc: LineAcc, p: string, i: number) => {
-                const arr = acc.arr.concat(<> {
-                    p.split("\n")
-                        .filter(line => line)
-                        .map((line, lineIx) =>
-                            <LineStyled key={line + lineIx}>{
+            .reduce((acc: ParAcc, p: string, i: number) => {
+                const accRes = p.split("\n")
+                    .filter(line => line.replace(/\s/g, ""))
+                    .reduce((lineAcc, line, lineIx) => {
+                            const lineArr = lineAcc.lineArr.concat(<LineStyled key={line + lineIx}>{
                                 line.split(' ')
                                     .map((word, wordIx) =>
                                         word === "&nbsp;"
@@ -42,12 +48,16 @@ const SectionText: FC<IProps> = ({sectionTextPage}) => {
                                         </span>
                                     )
                             } <b className="line_index"
-                                 style={{color: "blue"}}>{(++acc.ix) % 5 === 0 && (acc.ix)}
+                                 style={{color: "blue"}}>
+                                {lineAcc.lineIx % 5 === 0 && (lineAcc.lineIx)}
                             </b>
                             </LineStyled>)
-                }<br/></>)
-                return {arr, ix: acc.ix}
-            }, lineAcc).arr, [sectionTextPage])
+                            return {lineArr, lineIx: lineAcc.lineIx + 1}
+                        }, {lineArr: [], lineIx: acc.parIx} as LineAcc
+                    )
+                const parArr = acc.parArr.concat(<>{accRes.lineArr}<br/></>)
+                return {parArr, parIx: accRes.lineIx}
+            }, parAcc).parArr, [sectionTextPage])
 
     return (
         <TextList>{sectionText}</TextList>

@@ -1,13 +1,14 @@
 import {NextFunction, Request, Response} from "express";
 import {IBookRepo} from "../db/db.types";
+import {BookService} from "../services/book.service";
 
 export class BookController {
 
-    constructor(public bookRepo: IBookRepo) {}
+    constructor(private bookRepo: IBookRepo,  private bookService: BookService) {}
 
     async getBookById(req: Request, res: Response) {
-        const id = req.params?.id;
         try {
+            const id = req.params?.id;
             const book = await this.bookRepo.getOne(id);
             if (book) res.status(200).json(book);
         } catch (error) {
@@ -26,13 +27,22 @@ export class BookController {
 
     async getBookDescriptions(req: Request, res: Response) {
         try {
-            const books = await this.bookRepo.getAllDescriptions()
+            const books = await this.bookService.getBooksByQuery(req.query)
             res.status(200).send(books.map(b => ({...b, id: b._id})));
         } catch (error: any) {
             res.status(500).send(error.message)
         }
     }
 
+
+    async getNumberOfPages(req: Request, res: Response) {
+        try {
+            const pages = await this.bookService.getNumberOfPages(req.query)
+            res.status(200).json({pages});
+        } catch (error: any) {
+            res.status(500).send(error.message)
+        }
+    }
     async getSection(req: Request, res: Response, next: NextFunction) {
         try {
             const {bookId, sectionId} = req.params;

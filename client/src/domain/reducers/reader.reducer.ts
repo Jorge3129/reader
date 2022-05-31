@@ -22,9 +22,6 @@ const readerSlice = createSlice({
     name: "reader",
     initialState,
     reducers: {
-        setChosenBook: (state, {payload}) => {
-            state.chosenBook = payload
-        },
         setLoading: (state, {payload}) => {
             state.loading = payload
         },
@@ -41,7 +38,8 @@ const readerSlice = createSlice({
             state.path = payload
         },
         setBook: (state, {payload: book}: PayloadAction<DeepBook>) => {
-            const {content} = book;
+            const {content, ...rest} = book;
+            state.chosenBook = book;
             const structure = formatStructure(content);
             state.content = formatToShallowArray(structure)
             state.structure = structure
@@ -52,5 +50,5 @@ const readerSlice = createSlice({
 })
 
 export const selectReader = (state: RootState) => state.reader
-export const {setChosenBook, setSection, setLoading, setContent, setStructure, setBook, setPath} = readerSlice.actions
+export const {setSection, setLoading, setContent, setStructure, setBook, setPath} = readerSlice.actions
 export const readerReducer = readerSlice.reducer

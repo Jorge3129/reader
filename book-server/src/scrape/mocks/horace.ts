@@ -3,6 +3,7 @@ import {arr} from "../latin-library/carm1";
 import {arr2} from "../latin-library/carm2";
 import {arr3} from "../latin-library/carm3";
 import {arr4} from "../latin-library/carm4";
+import {flattenBookContent, formatBook} from "../../models/book.utils";
 
 export const horace: Book[] = [
     {
@@ -10,6 +11,7 @@ export const horace: Book[] = [
         author: "Horace",
         language: "latin",
         category: "classics",
+        genre: ["lyric poetry"],
         content: [
             {
                 title: "I",
@@ -34,3 +36,15 @@ export const horace: Book[] = [
         ]
     },
 ]
+
+export const formatOdes = (() => {
+    const book2 = formatBook(horace[0])
+    const mapContent2 = book2.content
+    flattenBookContent(mapContent2).map(
+        section => {
+            section.content = section.content
+                .replace(/\s{4,6}/g, '\n     ');
+        }
+    )
+    return {...book2, content: mapContent2, _id: undefined}
+})();

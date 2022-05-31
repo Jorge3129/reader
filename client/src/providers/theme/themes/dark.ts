@@ -6,5 +6,5 @@ export default {
     color: '#fff',
     linkColor: 'red',
     tableEvenRow: '#353d4d',
-    sidebarBg: '#282c34'
+    sidebarBg: '#353d4d'
 }

@@ -10,12 +10,12 @@ interface IProps {
 const Dictionary:FC<IProps> = () => {
 
     const {result, loading} = useDictionary()
-    const entries = result && result.map(entry => <DictEntry key={entry.id} entry={entry}/>)
+    const entries = result && result.map(entry => <DictEntry light key={entry.id} entry={entry}/>)
 
     return (
         <DictStyle>
             <h3 className="dict_title">Dictionary</h3>
-            {loading ? "Loading..." : entries}
+            {loading ? "Loading..." : entries?.length ? entries : "No result"}
         </DictStyle>
     );
 };

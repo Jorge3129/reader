@@ -1,8 +1,9 @@
 import MainContent from "../page/MainContent";
 import {useAuth} from "../../hooks/auth/useAuth";
 import {FC} from "react";
-import {Field, Form, Formik, FormikHelpers} from "formik"
+import {Field, Formik, FormikHelpers} from "formik"
 import {LoginValues} from "../../domain/types";
+import {FormStyled} from "./styles";
 
 const LoginPage: FC<{ title?: string }> = () => {
 
@@ -28,13 +29,13 @@ const LoginPage: FC<{ title?: string }> = () => {
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
             >
-                <Form>
+                <FormStyled>
                     <label htmlFor="email">Email</label>
                     <Field id="email" name="email" placeholder="johndoe@gmail.com" type="email"/>
-                    <label htmlFor="password">Last Name</label>
+                    <label htmlFor="password">Password</label>
                     <Field id="password" name="password" placeholder="password" type="password"/>
                     <button type="submit">Submit</button>
-                </Form>
+                </FormStyled>
             </Formik>
         </MainContent>
     );

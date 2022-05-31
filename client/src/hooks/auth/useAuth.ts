@@ -17,7 +17,7 @@ export const useAuth = () => {
         const res = await authService.login(values);
         if (!res.user) return res;
         dispatch(setUser(res.user))
-        navigate(from, {replace: true});
+        //navigate(from, {replace: true});
     }
 
     const logOut = async () => {

@@ -9,9 +9,10 @@ interface IProps {
     entry: Word
     deletable?: boolean
     deleteEntry?: (id: number) => void
+    light?: boolean
 }
 
-const DictEntry: FC<IProps> = ({entry, deletable, deleteEntry}) => {
+const DictEntry: FC<IProps> = ({entry, deletable, deleteEntry, light}) => {
 
     const {user} = useAppSelector(selectUser)
 
@@ -27,7 +28,7 @@ const DictEntry: FC<IProps> = ({entry, deletable, deleteEntry}) => {
     }
 
     return (
-        <DictEntryStyle>
+        <DictEntryStyle light={light}>
             <AddButtonWrap onClick={e => addWord(entry)}/>
             {deletable &&
                 <DeleteButtonWrap onClick={e => deleteWord(entry)}/>}

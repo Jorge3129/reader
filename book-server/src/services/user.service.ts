@@ -11,7 +11,7 @@ const uuid = require('uuid')
 
 export class UserService {
 
-    constructor(public userRepo: IUserRepo, public tokenService: any) {
+    constructor(private userRepo: IUserRepo, private tokenService: any) {
     }
 
     async register(reqUser: User) {

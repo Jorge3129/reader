@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 export const HeaderStyled = styled.header`
   width: 100%;
-  height: 4rem;
+  min-height: 4rem;
   background-color: black;
   display: flex;
   flex-direction: row;
@@ -46,6 +46,10 @@ MainStyled.displayName = 'MainStyled'
 
 export const Content = styled.div`
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 `
 Content.displayName = 'Content'
 

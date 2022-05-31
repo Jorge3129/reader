@@ -5,6 +5,7 @@ import {useDictionary} from "../../../hooks/reader/useDictionary";
 import SectionLink from "../content-table/SectionLink";
 import CopyButton from "../../reusable/CopyButton";
 import SectionText from "./SectionText";
+import SectionText2 from "./SectionText2";
 
 interface IProps {
 
@@ -42,7 +43,8 @@ const Text: FC<IProps> = () => {
         <TextStyle>
             <div className="container" ref={scrollRef} onScroll={onScroll}>
                 <h2 className="section_title">{section.title}</h2>
-                <SectionText sectionTextPage={sectionTextPage}/>
+                {/*<SectionText sectionTextPage={sectionTextPage}/>*/}
+                <SectionText2 sectionTextPage={sectionTextPage}/>
                 <PageMenu>
                     {!section.first && <SectionLink className={"next_section_link"} section={section}
                                                     step={-1}>&lt; Prev</SectionLink>}

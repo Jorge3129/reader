@@ -1,22 +1,31 @@
 import styled from "styled-components";
 import {AddButton, DeleteButton} from "../../reusable/CopyButton";
+import light from "../../../providers/theme/themes/light";
 
 
 export const DictStyle = styled.div`
-  
-    & .dict_title {
-      padding: 0.5rem 0;
-      text-align: center;
-    }
+
+  & .dict_title {
+    padding: 0.5rem 0;
+    text-align: center;
+  }
 `
 
-export const DictEntryStyle = styled.div`
-  
+interface IDictEntryStyle {
+    light?: boolean
+}
+
+export const DictEntryStyle = styled.div.attrs(
+    (props: IDictEntryStyle) => props
+)`
   margin: 1rem;
   padding: 0.5rem;
   word-break: break-word;
   position: relative;
-  background-color: ${props => props.theme.background};
+  background-color: ${props => props.light ?
+          props.theme.background :
+          props.theme.sidebarBg
+  };
   border-radius: 0.3rem;
 
   & .word_type {

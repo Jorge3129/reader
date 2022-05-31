@@ -18,7 +18,7 @@ export class LangController {
     async queryWord(word: string){
         try {
             const res = await axios.get(this.buildQuery(word));
-            console.log(res.data)
+            //console.log(res.data)
             return res.data;
         } catch (e) {
             return []

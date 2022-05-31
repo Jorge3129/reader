@@ -7,7 +7,7 @@ import {useSection} from "./useSection";
 
 export const useFetchOneBook = () => {
     const dispatch = useAppDispatch()
-    const {content, chosenBook} = useAppSelector(selectReader)
+    const {content} = useAppSelector(selectReader)
     const {bookIdParam, sectionId} = useParams()
     const {choosePath, path, loading} = useSection()
 
@@ -15,8 +15,7 @@ export const useFetchOneBook = () => {
         // console.log(chosenBook?.id, bookIdParam, chosenBook?.id === bookIdParam)
         if (bookIdParam
            // && chosenBook?.id !== bookIdParam
-        )
-            dispatch(readerThunk(bookIdParam))
+        ) dispatch(readerThunk(bookIdParam))
     }, [])
 
     useEffect(() => {

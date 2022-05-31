@@ -8,12 +8,12 @@ export const useBooks = () => {
     return {books, loading}
 }
 
-export const useFetchBooks = () => {
+export const useFetchBooks = (params?: {page?: number, size?: number}) => {
     const {books} = useAppSelector(selectBooks)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (books?.length) return;
-        dispatch(bookThunk())
+        dispatch(bookThunk(params))
     }, [])
 }
