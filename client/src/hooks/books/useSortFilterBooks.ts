@@ -1,9 +1,9 @@
 import { useMemo, useState} from "react";
 import {FilterOption, SortOption} from "../../domain/types";
 import _ from "lodash"
-import {Book} from "../../domain/entities/books";
+import {Book, BookDescription} from "../../domain/entities/book/books";
 
-export const useSortFilterBooks = (books: Book[]) => {
+export const useSortFilterBooks = (books: BookDescription[]) => {
     const [sort, setSort] = useState<SortOption>()
     const [filter, setFilter] = useState<FilterOption>()
 
@@ -14,7 +14,7 @@ export const useSortFilterBooks = (books: Book[]) => {
 
     const editedBooks = useMemo(() => {
         if (!filter) return sortedBooks;
-        return sortedBooks.filter(book => book[filter.prop] === filter.value)
+        return sortedBooks.filter(book => book[filter.prop as keyof BookDescription] === filter.value)
     }, [filter, sortedBooks])
 
     const chooseSort = (prop: string) => {

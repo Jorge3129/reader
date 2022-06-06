@@ -1,4 +1,4 @@
-import {User} from "../models/user";
+import {User} from "../../models/user";
 import {ObjectId} from "mongodb";
 
 export class UserDto {

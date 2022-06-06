@@ -1,10 +1,10 @@
-import {BookSection} from "../../models/book";
+import {TextSection} from "../../models/book/book";
 
-export const arr2: BookSection[] = [
+export const arr2: TextSection[] = [
     {
-            id: 0,
-            title: "I",
-            content: `
+        id: 0,
+        title: "I",
+        textContent: `
 Motum ex Metello consule civicum
 bellique causas et vitia et modos
      ludumque Fortunae gravisque
@@ -55,11 +55,11 @@ Ceae retractes munera Neniae,
      mecum Dionaeo sub antro
      quaere modos leviore plectro.
 `
-        },
-{
-            id: 1,
-            title: "II",
-            content: `
+    },
+    {
+        id: 1,
+        title: "II",
+        textContent: `
 Nullus argento color est avaris
 abdito terris, inimice lamnae
 Crispe Sallusti, nisi temperato
@@ -90,11 +90,11 @@ deferens uni propriamque laurum
 quisquis ingentis oculo inretorto
      spectat acervos.
 `
-        },
-{
-            id: 2,
-            title: "III",
-            content: `
+    },
+    {
+        id: 2,
+        title: "III",
+        textContent: `
 Aequam memento rebus in arduis
 servare mentem, non secus in bonis
      ab insolenti temperatam
@@ -130,11 +130,11 @@ versatur urna serius ocius
      sors exitura et nos in aeternum
      exilium impositura cumbae.
 `
-        },
-{
-            id: 3,
-            title: "IV",
-            content: `
+    },
+    {
+        id: 3,
+        title: "IV",
+        textContent: `
 Ne sit ancillae tibi amor pudori,
 Xanthia Phoceu: prius insolentem
 serva Briseis niveo colore
@@ -165,11 +165,11 @@ integer laudo: fuge suspicari
 cuius octauvm trepidavit aetas
      claudere lustrum.
 `
-        },
-{
-            id: 4,
-            title: "V",
-            content: `
+    },
+    {
+        id: 4,
+        title: "V",
+        textContent: `
 Nondum subacta ferre iugum valet
 cervice, nondum munia comparis
      aequare nec tauri ruentis
@@ -200,11 +200,11 @@ mire sagacis falleret hospites
      discrimen obscurum solutis
      crinibus ambiguoque voltu.
 `
-        },
-{
-            id: 5,
-            title: "VI",
-            content: `
+    },
+    {
+        id: 5,
+        title: "VI",
+        textContent: `
 Septimi, Gadis aditure mecum et
 Cantabrum indoctum iuga ferre nostra et
 barbaras Syrtis, ubi Maura semper
@@ -235,11 +235,11 @@ postulant arces; ibi tu calentem
 debita sparges lacrima favillam
      vatis amici.
 `
-        },
-{
-            id: 6,
-            title: "VII",
-            content: `
+    },
+    {
+        id: 6,
+        title: "VII",
+        textContent: `
 O saepe mecum tempus in ultimum
 deducte Bruto militiae duce,
      quis te redonavit Quiritem
@@ -275,11 +275,11 @@ dicet bibendi? Non ego sanius
      bacchabor Edonis: recepto
      dulce mihi furere est amico.
 `
-        },
-{
-            id: 7,
-            title: "VIII",
-            content: `
+    },
+    {
+        id: 7,
+        title: "VIII",
+        textContent: `
 Ulla si iuris tibi peierati
 poena, Barine, nocuisset umquam,
 dente si nigro fieres vel uno
@@ -310,11 +310,11 @@ te senes parci miseraeque nuper
 virgines nuptae, tua ne retardet
      aura maritos.
 `
-        },
-{
-            id: 8,
-            title: "IX",
-            content: `
+    },
+    {
+        id: 8,
+        title: "IX",
+        textContent: `
 Non semper imbres nubibus hispidos
 manant in agros aut mare Caspium
      vexant inaequales procellae
@@ -345,11 +345,11 @@ victis minores volvere vertices
      intraque praescriptum Gelonos
      exiguis equitare campis.
 `
-        },
-{
-            id: 9,
-            title: "X",
-            content: `
+    },
+    {
+        id: 9,
+        title: "X",
+        textContent: `
 Rectius vives, Licini, neque altum
 semper urgendo neque, dum procellas
 cautus horrescis, nimium premendo
@@ -380,11 +380,11 @@ fortis appare; sapienter idem
 contrahes vento nimium secundo
      turgida vela.
 `
-        },
-{
-            id: 10,
-            title: "XI",
-            content: `
+    },
+    {
+        id: 10,
+        title: "XI",
+        textContent: `
 Quid bellicosus Cantaber et Scythes,
 Hirpine Quincti, cogitet Hadria
      divisus obiecto, remittas
@@ -415,11 +415,11 @@ Lyden? Eburna dic, age, cum lyra
      maturet, in comptum Lacaenae
      more comas religata nodum.
 `
-        },
-{
-            id: 11,
-            title: "XII",
-            content: `
+    },
+    {
+        id: 11,
+        title: "XII",
+        textContent: `
 Nolis longa ferae bella Numantiae,
 nec durum Hannibalem nec Siculum mare
 Poeno purpureum sanguine mollibus
@@ -456,11 +456,11 @@ cervicem aut facili saevitia negat
 quae poscente magis gaudeat eripi,
      interdum rapere occupet?
 `
-        },
-{
-            id: 12,
-            title: "XIII",
-            content: `
+    },
+    {
+        id: 12,
+        title: "XIII",
+        textContent: `
 Ille et nefasto te posuit die,
 quicumque primum, et sacrilega manu
      produxit, arbos, in nepotum
@@ -511,11 +511,11 @@ dulci laborum decipitur sono
      nec curat Orion leones
      aut timidos agitare lyncas.
 `
-        },
-{
-            id: 13,
-            title: "XIV",
-            content: `
+    },
+    {
+        id: 13,
+        title: "XIV",
+        textContent: `
 Eheu fugaces, Postume, Postume,
 labuntur anni nec pietas moram
      rugis et instanti senectae
@@ -551,11 +551,11 @@ servata centum clavibus et mero
      tinguet pavimentum superbo,
      pontificum potiore cenis.
 `
-        },
-{
-            id: 14,
-            title: "XV",
-            content: `
+    },
+    {
+        id: 14,
+        title: "XV",
+        textContent: `
 Iam pauca aratro iugera regiae
 moles relinquent, undique latius
      extenta visentur Lucrino
@@ -581,11 +581,11 @@ leges sinebant, oppida publico
      sumptu iubentes et deorum
      templa novo decorare saxo.
 `
-        },
-{
-            id: 15,
-            title: "XVI",
-            content: `
+    },
+    {
+        id: 15,
+        title: "XVI",
+        textContent: `
 Otium divos rogat in patenti
 prensus Aegaeo, simul atra nubes
 condidit lunam neque certa fulgent
@@ -636,11 +636,11 @@ spiritum Graiae tenuem Camenae
 Parca non mendax dedit et malignum
      spernere volgus.
 `
-        },
-{
-            id: 16,
-            title: "XVII",
-            content: `
+    },
+    {
+        id: 16,
+        title: "XVII",
+        textContent: `
 Cur me querellis exanimas tuis?
 Nec dis amicum est nec mihi te prius
      obire, Maecenas, mearum
@@ -681,11 +681,11 @@ custos virorum. Reddere victimas
      aedemque votivam memento;
      nos humilem feriemus agnam.
 `
-        },
-{
-            id: 17,
-            title: "XVIII",
-            content: `
+    },
+    {
+        id: 17,
+        title: "XVIII",
+        textContent: `
      Non ebur neque aureum
 mea renidet in domo lacunar;
      non trabes Hymettiae
@@ -727,11 +727,11 @@ genus coercet, hic levare functum
      pauperem laboribus
 vocatus atque non vocatus audit.
 `
-        },
-{
-            id: 18,
-            title: "XIX",
-            content: `
+    },
+    {
+        id: 18,
+        title: "XIX",
+        textContent: `
 Bacchum in remotis carmina rupibus
 vidi docentem, credite posteri,
      Nymphasque discentis et auris
@@ -772,11 +772,11 @@ cornu decorum leniter atterens
      caudam et recedentis trilingui
      ore pedes tetigitque crura.
 `
-        },
-{
-            id: 19,
-            title: "XX",
-            content: `
+    },
+    {
+        id: 19,
+        title: "XX",
+        textContent: `
 Non usitata nec tenui ferar
 penna biformis per liquidum aethera
      vates neque in terris morabor
@@ -807,5 +807,5 @@ luctusque turpes et querimoniae;
      conpesce clamorem ac sepulcri
      mitte supervacuos honores.
 `
-        }
+    }
 ]

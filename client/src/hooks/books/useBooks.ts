@@ -4,11 +4,11 @@ import {useEffect} from "react";
 import {bookThunk} from "../../domain/reducers/books.thunk";
 
 export const useBooks = () => {
-    const {books, loading} = useAppSelector(selectBooks)
-    return {books, loading}
+    const {books, loading, pages} = useAppSelector(selectBooks)
+    return {books, loading, pages}
 }
 
-export const useFetchBooks = (params?: {page?: number, size?: number}) => {
+export const useFetchBooks = (params?: {page?: number, size?: number, pages?: true}) => {
     const {books} = useAppSelector(selectBooks)
     const dispatch = useAppDispatch()
 

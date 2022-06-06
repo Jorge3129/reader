@@ -1,10 +1,10 @@
-import {BookSection} from "../../models/book";
+import {ContainerSection, TextSection} from "../../models/book/book";
 
-export const arr: BookSection[] = [
+export const arr: TextSection[] = [
     {
-            id: 0,
-            title: "I",
-            content: `
+        id: 0,
+        title: "I",
+        textContent: `
 Maecenas atavis edite regibus,
 o et praesidium et dulce decus meum,
 sunt quos curriculo pulverem Olympicum
@@ -41,12 +41,20 @@ Euterpe cohibet nec Polyhymnia
 Lesboum refugit tendere barbiton.
 Quod si me lyricis vatibus inseres,
 sublimi feriam sidera vertice.
-`
-        },
-{
-            id: 1,
-            title: "II",
-            content: `
+`.split('\n')
+            .filter(line => line.replace(/\s/g, ""))
+            .reduce((acc, line, i) => {
+                return i % 4 === 0 ?
+                    [...acc, [line]] :
+                    [...acc.slice(0, -1), acc[acc.length - 1].concat(line)]
+            }, [] as string[][])
+            .map(p => p.join("\n"))
+            .join('\n\n')
+    },
+    {
+        id: 1,
+        title: "II",
+        textContent: `
 Iam satis terris nivis atque dirae
 grandinis misit Pater et rubente
 dextera sacras iaculatus arces
@@ -112,11 +120,11 @@ hic ames dici pater atque princeps,
 neu sinas Medos equitare inultos
      te duce, Caesar.
 `
-        },
-{
-            id: 2,
-            title: "III",
-            content: `
+    },
+    {
+        id: 2,
+        title: "III",
+        textContent: `
      Sic te diva potens Cypri,
 sic fratres Helenae, lucida sidera,
      ventorumque regat pater
@@ -158,11 +166,11 @@ caelum ipsum petimus stultitia neque
      per nostrum patimur scelus
 iracunda Iovem ponere fulmina.
 `
-        },
-{
-            id: 3,
-            title: "IV",
-            content: `
+    },
+    {
+        id: 3,
+        title: "IV",
+        textContent: `
 Soluitur acris hiems grata vice veris et Favoni
      trahuntque siccas machinae carinas,
 ac neque iam stabulis gaudet pecus aut arator igni
@@ -184,11 +192,11 @@ et domus exilis Plutonia, quo simul mearis,
 nec tenerum Lycidan mirabere, quo calet iuventus
      nunc omnis et mox virgines tepebunt.
 `
-        },
-{
-            id: 4,
-            title: "V",
-            content: `
+    },
+    {
+        id: 4,
+        title: "V",
+        textContent: `
 Quis multa gracilis te puer in rosa
 perfusus liquidis urget odoribus
      grato, Pyrrha, sub antro?
@@ -209,11 +217,11 @@ votiva paries indicat uvida
      suspendisse potenti
      vestimenta maris deo.
 `
-        },
-{
-            id: 5,
-            title: "VI",
-            content: `
+    },
+    {
+        id: 5,
+        title: "VI",
+        textContent: `
 Scriberis Vario fortis et hostium
 uictor, Maeonii carminis alite,
 quam rem cumque ferox nauibus aut equis
@@ -239,11 +247,11 @@ sectis in iuvenes unguibus acrium
 cantamus, vacui sive quid urimur
      non praeter solitum leves.
 `
-        },
-{
-            id: 6,
-            title: "VII",
-            content: `
+    },
+    {
+        id: 6,
+        title: "VII",
+        textContent: `
 Laudabunt alii claram Rhodon aut Mytilenen
      aut Ephesum bimarisve Corinthi
 moenia vel Baccho Thebas vel Apolline Delphos
@@ -277,11 +285,11 @@ ambiguam tellure nova Salamina futuram.
 mecum saepe viri, nunc vino pellite curas;
      cras ingens iterabimus aequor.'
 `
-        },
-{
-            id: 7,
-            title: "VIII",
-            content: `
+    },
+    {
+        id: 7,
+        title: "VIII",
+        textContent: `
      Lydia, dic, per omnis
 te deos oro, Sybarin cur properes amando
      perdere, cur apricum
@@ -299,11 +307,11 @@ filium dicunt Thetidis sub lacrimosa Troia
      funera, ne virilis
 cultus in caedem et Lycias proriperet catervas?
 `
-        },
-{
-            id: 8,
-            title: "IX",
-            content: `
+    },
+    {
+        id: 8,
+        title: "IX",
+        textContent: `
 Vides ut alta stet nive candidum
 Soracte nec iam sustineant onus
      silvae laborantes geluque
@@ -335,11 +343,11 @@ gratus puellae risus ab angulo
      pignusque dereptum lacertis
      aut digito male pertinaci.
 `
-        },
-{
-            id: 9,
-            title: "X",
-            content: `
+    },
+    {
+        id: 9,
+        title: "X",
+        textContent: `
 Mercuri, facunde nepos Atlantis,
 qui feros cultus hominum recentum
 voce formasti catus et decorae
@@ -365,11 +373,11 @@ sedibus virgaque levem coerces
 aurea turbam, superis deorum
      gratus et imis.
 `
-        },
-{
-            id: 10,
-            title: "XI",
-            content: `
+    },
+    {
+        id: 10,
+        title: "XI",
+        textContent: `
 Tu ne quaesieris (scire nefas) quem mihi, quem tibi
 finem di dederint, Leuconoe, nec Babylonios
 temptaris numeros. Ut melius quicquid erit pati!
@@ -379,11 +387,11 @@ Tyrrhenum, sapias, vina liques et spatio brevi
 spem longam reseces. Dum loquimur, fugerit invida
 aetas: carpe diem, quam minimum credula postero.
 `
-        },
-{
-            id: 11,
-            title: "XII",
-            content: `
+    },
+    {
+        id: 11,
+        title: "XII",
+        textContent: `
 Quem virum aut heroa lyra vel acri
 tibia sumis celebrare, Clio?
 Quem deum? Cuius recinet iocosa
@@ -459,11 +467,11 @@ tu gravi curru quaties Olympum,
 tu parum castis inimica mittes
      fulmina lucis.
 `
-        },
-{
-            id: 12,
-            title: "XIII",
-            content: `
+    },
+    {
+        id: 12,
+        title: "XIII",
+        textContent: `
      Cum tu, Lydia, Telephi
 cervicem roseam, cerea Telephi
      laudas bracchia, vae, meum
@@ -485,11 +493,11 @@ quos inrupta tenet copula nec malis
      divolsus querimoniis
 suprema citius solvet amor die.
 `
-        },
-{
-            id: 13,
-            title: "XIV",
-            content: `
+    },
+    {
+        id: 13,
+        title: "XIV",
+        textContent: `
 O navis, referent in mare te novi
 fluctus. O quid agis? Fortiter occupa
      portum. Nonne vides ut
@@ -515,11 +523,11 @@ nunc desiderium curaque non levis,
      interfusa nitentis
      vites aequora Cycladas.
 `
-        },
-{
-            id: 14,
-            title: "XV",
-            content: `
+    },
+    {
+        id: 14,
+        title: "XV",
+        textContent: `
 Pastor cum traheret per freta navibus
 Idaeis Helenen perfidus hospitam,
 ingrato celeris obruit otio
@@ -565,11 +573,11 @@ matronisque Phrygum classis Achillei;
 post certas hiemes uret Achaicus
      ignis Iliacas domos.'
 `
-        },
-{
-            id: 15,
-            title: "XVI",
-            content: `
+    },
+    {
+        id: 15,
+        title: "XVI",
+        textContent: `
 O matre pulchra filia pulchrior,
 quem criminosis cumque voles modum
      pones iambis, sive flamma
@@ -605,11 +613,11 @@ mutare quaero tristia, dum mihi
      fias recantatis amica
      opprobriis animumque reddas.
 `
-        },
-{
-            id: 16,
-            title: "XVII",
-            content: `
+    },
+    {
+        id: 16,
+        title: "XVII",
+        textContent: `
 Velox amoenum saepe Lucretilem
 mutat Lycaeo Faunus et igneam
      defendit aestatem capellis
@@ -645,11 +653,11 @@ incontinentis iniciat manus
      et scindat haerentem coronam
      crinibus inmeritamque vestem.
 `
-        },
-{
-            id: 17,
-            title: "XVIII",
-            content: `
+    },
+    {
+        id: 17,
+        title: "XVIII",
+        textContent: `
 Nullam, Vare, sacra vite prius severis arborem
 circa mite solum Tiburis et moenia Catili;
 siccis omnia nam dura deus proposuit neque
@@ -667,11 +675,11 @@ cornu tympana, quae subsequitur caecus amor sui
 et tollens vacuum plus nimio gloria verticem
 arcanique fides prodiga, perlucidior vitro.
 `
-        },
-{
-            id: 18,
-            title: "XIX",
-            content: `
+    },
+    {
+        id: 18,
+        title: "XIX",
+        textContent: `
      Mater saeva Cupidinum
 Thebanaeque iubet me Semelae puer
      et lasciva Licentia
@@ -689,11 +697,11 @@ verbenas, pueri, ponite turaque
      bimi cum patera meri:
 mactata veniet lenior hostia.
 `
-        },
-{
-            id: 19,
-            title: "XX",
-            content: `
+    },
+    {
+        id: 19,
+        title: "XX",
+        textContent: `
 Vile potabis modicis Sabinum
 cantharis, Graeca quod ego ipse testa
 conditum levi, datus in theatro
@@ -709,11 +717,11 @@ tu bibes uvam; mea nec Falernae
 temperant vites neque Formiani
      pocula colles.
 `
-        },
-{
-            id: 20,
-            title: "XXI",
-            content: `
+    },
+    {
+        id: 20,
+        title: "XXI",
+        textContent: `
 Dianam tenerae dicite virgines,
 intonsum, pueri, dicite Cynthium
      Latonamque supremo
@@ -734,11 +742,11 @@ pestemque a populo et principe Caesare in
      Persas atque Britannos
      vestra motus aget prece.
 `
-        },
-{
-            id: 21,
-            title: "XXII",
-            content: `
+    },
+    {
+        id: 21,
+        title: "XXII",
+        textContent: `
 Integer vitae scelerisque purus
 non eget Mauris iaculis neque arcu
 nec venenatis gravida sagittis,
@@ -769,11 +777,11 @@ solis in terra domibus negata:
 dulce ridentem Lalagen amabo,
      dulce loquentem.
 `
-        },
-{
-            id: 22,
-            title: "XXIII",
-            content: `
+    },
+    {
+        id: 22,
+        title: "XXIII",
+        textContent: `
 Vitas inuleo me similis, Chloe,
 quaerenti pavidam montibus aviis
      matrem non sine vano
@@ -789,11 +797,11 @@ Gaetulusue leo, frangere persequor:
      tandem desine matrem
      tempestiva sequi viro.
 `
-        },
-{
-            id: 23,
-            title: "XXIV",
-            content: `
+    },
+    {
+        id: 23,
+        title: "XXIV",
+        textContent: `
 Quis desiderio sit pudor aut modus
 tam cari capitis? Praecipe lugubris
 cantus, Melpomene, cui liquidam pater
@@ -819,11 +827,11 @@ nigro compulerit Mercurius gregi?
 durum: sed levius fit patientia
      quicquid corrigere est nefas.
 `
-        },
-{
-            id: 24,
-            title: "XXV",
-            content: `
+    },
+    {
+        id: 24,
+        title: "XXV",
+        textContent: `
 Parcius iunctas quatiunt fenestras
 iactibus crebris iuvenes proterui
 nec tibi somnos adimunt amatque
@@ -849,11 +857,11 @@ gaudeat pulla magis atque myrto,
 aridas frondes hiemis sodali
      dedicet Euro.
 `
-        },
-{
-            id: 25,
-            title: "XXVI",
-            content: `
+    },
+    {
+        id: 25,
+        title: "XXVI",
+        textContent: `
 Musis amicus tristitiam et metus
 tradam protervis in mare Creticum
      portare ventis, quis sub Arcto
@@ -869,11 +877,11 @@ prosunt honores; hunc fidibus novis,
      hunc Lesbio sacrare plectro
      teque tuasque decet sorores.
 `
-        },
-{
-            id: 26,
-            title: "XXVII",
-            content: `
+    },
+    {
+        id: 26,
+        title: "XXVII",
+        textContent: `
 Natis in usum laetitiae scyphis
 pugnare Thracum est; tollite barbarum
      morem verecundumque Bacchum
@@ -904,11 +912,11 @@ magus venenis, quis poterit deus?
      vix inligatum te triformi
      Pegasus expediet Chimaera.
 `
-        },
-{
-            id: 27,
-            title: "XXVIII",
-            content: `
+    },
+    {
+        id: 27,
+        title: "XXVIII",
+        textContent: `
 Te maris et terrae numeroque carentis harenae
      mensorem cohibent, Archyta,
 pulveris exigui prope latum parva Matinum
@@ -946,11 +954,11 @@ te maneant ipsum: precibus non linquar inultis
 Quamquam festinas, non est mora longa; licebit
      iniecto ter pulvere curras.
 `
-        },
-{
-            id: 28,
-            title: "XXIX",
-            content: `
+    },
+    {
+        id: 28,
+        title: "XXIX",
+        textContent: `
 Icci, beatis nunc Arabum invides
 gazis et acrem militiam paras
      non ante devictis Sabaeae
@@ -971,11 +979,11 @@ libros Panaeti Socraticam et domum
      mutare loricis Hiberis,
      pollicitus meliora, tendis?
 `
-        },
-{
-            id: 29,
-            title: "XXX",
-            content: `
+    },
+    {
+        id: 29,
+        title: "XXX",
+        textContent: `
 O Venus regina Cnidi Paphique,
 sperne dilectam Cypron et vocantis
 ture te multo Glycerae decoram
@@ -986,11 +994,11 @@ Gratiae zonis properentque Nymphae
 et parum comis sine te Iuventas
      Mercuriusque.
 `
-        },
-{
-            id: 30,
-            title: "XXXI",
-            content: `
+    },
+    {
+        id: 30,
+        title: "XXXI",
+        textContent: `
 Quid dedicatum poscit Apollinem
 vates? Quid orat, de patera novum
      fundens liquorem? Non opimae
@@ -1016,11 +1024,11 @@ Latoe, dones, at, precor, integra
      cum mente, nec turpem senectam
      degere nec cithara carentem.
 `
-        },
-{
-            id: 31,
-            title: "XXXII",
-            content: `
+    },
+    {
+        id: 31,
+        title: "XXXII",
+        textContent: `
 Poscimur. Si quid vacui sub umbra
 lusimus tecum, quod et hunc in annum
 vivat et pluris, age, dic Latinum,
@@ -1041,11 +1049,11 @@ grata testudo Iovis, o laborum
 dulce lenimen, mihi cumque salve
      rite vocanti.
 `
-        },
-{
-            id: 32,
-            title: "XXXIII",
-            content: `
+    },
+    {
+        id: 32,
+        title: "XXXIII",
+        textContent: `
 Albi, ne doleas plus nimio memor
 inmitis Glycerae neu miserabilis
 descantes elegos, cur tibi iunior
@@ -1066,11 +1074,11 @@ grata detinuit compede Myrtale
 libertina, fretis acrior Hadriae
      curuantis Calabros sinus.
 `
-        },
-{
-            id: 33,
-            title: "XXXIV",
-            content: `
+    },
+    {
+        id: 33,
+        title: "XXXIV",
+        textContent: `
 Parcus deorum cultor et infrequens,
 insanientis dum sapientiae
      consultus erro, nunc retrorsum
@@ -1091,11 +1099,11 @@ obscura promens; hinc apicem rapax
      Fortuna cum stridore acuto
      sustulit, hic posuisse gaudet.
 `
-        },
-{
-            id: 34,
-            title: "XXXV",
-            content: `
+    },
+    {
+        id: 34,
+        title: "XXXV",
+        textContent: `
 O diva, gratum quae regis Antium,
 praesens vel imo tollere de gradu
      mortale corpus vel superbos
@@ -1146,11 +1154,11 @@ pepercit aris? O utinam nova
      incude diffingas retusum in
      Massagetas Arabasque ferrum!
 `
-        },
-{
-            id: 35,
-            title: "XXXVI",
-            content: `
+    },
+    {
+        id: 35,
+        title: "XXXVI",
+        textContent: `
      Et ture et fidibus iuvat
 placare et vituli sanguini debito
      custodes Numidae deos,
@@ -1172,11 +1180,11 @@ deponent oculos nec Damalis nouo
      divelletur adultero
 lascivis hederis ambitiosior.
 `
-        },
-{
-            id: 36,
-            title: "XXXVII",
-            content: `
+    },
+    {
+        id: 36,
+        title: "XXXVII",
+        textContent: `
 Nunc est bibendum, nunc pede libero
 pulsanda tellus, nunc Saliaribus
      ornare pulvinar deorum
@@ -1217,11 +1225,11 @@ saevis Liburnis scilicet invidens
      privata deduci superbo,
      non humilis mulier, triumpho.
 `
-        },
-{
-            id: 37,
-            title: "XXXVIII",
-            content: `
+    },
+    {
+        id: 37,
+        title: "XXXVIII",
+        textContent: `
 Persicos odi, puer, apparatus,
 displicent nexae philyra coronae,
 mitte sectari, rosa quo locorum
@@ -1232,5 +1240,5 @@ sedulus, curo: neque te ministrum
 dedecet myrtus neque me sub arta
      vite bibentem.
 `
-        }
+    }
 ]

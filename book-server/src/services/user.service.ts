@@ -3,7 +3,7 @@ import {User} from "../models/user";
 import argon2 from "argon2";
 import {Null} from "../models/type.utils";
 import {ApiError} from "../exceptions/api-error";
-import {UserDto} from "../dtos/user.dto";
+import {UserDto} from "../utils/dtos/user.dto";
 import mailService from './mail.service'
 import {ObjectId} from "mongodb";
 

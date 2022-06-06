@@ -1,6 +1,6 @@
 import {Collection, Db, MongoClient} from "mongodb";
 import {IDBService, IDBServiceFactory} from "../db.types";
-import {Book} from "../../models/book";
+import {Book} from "../../models/book/book";
 import {MongoBookRepo} from "./mongo.book.repo";
 import {User} from "../../models/user";
 import {ICollections} from "./types";

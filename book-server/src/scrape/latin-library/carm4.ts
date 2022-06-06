@@ -1,10 +1,10 @@
-import {BookSection} from "../../models/book";
+import {TextSection} from "../../models/book/book";
 
-export const arr4: BookSection[] = [
+export const arr4: TextSection[] = [
     {
             id: 0,
             title: "I",
-            content: `
+            textContent: `
      Intermissa, Venus, diu
 rursus bella moves? Parce precor, precor.
      Non sum qualis eram bonae
@@ -50,7 +50,7 @@ campi, te per aquas, dure, volubilis.
 {
             id: 1,
             title: "II",
-            content: `
+            textContent: `
 Pindarum quisquis studet aemulari,
 Iulle, ceratis ope Daedalea
 nititur pinnis, vitreo daturus
@@ -130,7 +130,7 @@ qua notam duxit niveus videri,
 {
             id: 2,
             title: "III",
-            content: `
+            textContent: `
      Quem tu, Melpomene, semel
 nascentem placido lumine videris,
      illum non labor Isthmius
@@ -160,7 +160,7 @@ quod spiro et placeo, si placeo, tuum est.
 {
             id: 3,
             title: "IV",
-            content: `
+            textContent: `
 Qualem ministrum fulminis alitem,
 cui rex deorum regnum in avis vagas
      permisit expertus fidelem
@@ -260,7 +260,7 @@ quas et benigno numine Iuppiter
 {
             id: 4,
             title: "V",
-            content: `
+            textContent: `
 Divis orte bonis, optume Romulae
 custos gentis, abes iam nimium diu;
 maturum reditum pollicitus patrum
@@ -315,7 +315,7 @@ sicco mane die, dicimus uvidi,
 {
             id: 5,
             title: "VI",
-            content: `
+            textContent: `
 Dive, quem proles Niobea magnae
 vindicem linguae Tityosque raptor
 sensit et Troiae prope victor altae
@@ -375,7 +375,7 @@ reddidi carmen docilis modorum
 {
             id: 6,
             title: "VII",
-            content: `
+            textContent: `
 Diffugere nives, redeunt iam gramina campis
      arboribusque comae;
 mutat terra vices et decrescentia ripas
@@ -409,7 +409,7 @@ nec Lethaea valet Theseus abrumpere caro
 {
             id: 7,
             title: "VIII",
-            content: `
+            textContent: `
 Donarem pateras grataque commodus,
 Censorine, meis aera sodalibus,
 donarem tripodas, praemia fortium
@@ -449,7 +449,7 @@ Liber vota bonos ducit ad exitus.
 {
             id: 8,
             title: "IX",
-            content: `
+            textContent: `
 Ne forte credas interitura quae
 longe sonantem natus ad Aufidum
      non ante volgatas per artis
@@ -519,7 +519,7 @@ peiusque leto flagitium timet,
 {
             id: 9,
             title: "X",
-            content: `
+            textContent: `
 O crudelis adhuc et Veneris muneribus potens,
 insperata tuae cum veniet pluma superbiae
 et, quae nunc umeris involitant, deciderint comae,
@@ -533,7 +533,7 @@ vel cur his animis incolumes non redeunt genae?'
 {
             id: 10,
             title: "XI",
-            content: `
+            textContent: `
 Est mihi nonum superantis annum
 plenus Albani cadus, est in horto,
 Phylli, nectendis apium coronis,
@@ -583,7 +583,7 @@ voce quos reddas; minuentur atrae
 {
             id: 11,
             title: "XII",
-            content: `
+            textContent: `
 Iam veris comites, quae mare temperant,
 impellunt animae lintea Thraciae,
 iam nec prata rigent, nec fluvii strepunt
@@ -623,7 +623,7 @@ misce stultitiam consiliis brevem:
 {
             id: 12,
             title: "XIII",
-            content: `
+            textContent: `
 Audivere, Lyce, di mea vota, di
 audivere, Lyce: fis anus, et tamen
      vis formosa videri
@@ -663,7 +663,7 @@ possent ut iuvenes visere fervidi
 {
             id: 13,
             title: "XIV",
-            content: `
+            textContent: `
 Quae cura patrum quaeve Quiritium
 plenis honorum muneribus tuas,
      Auguste, virtutes in aevum
@@ -733,7 +733,7 @@ duraeque tellus audit Hiberiae,
 {
             id: 14,
             title: "XV",
-            content: `
+            textContent: `
 Phoebus volentem proelia me loqui
 victas et urbes increpuit lyra,
      ne parva Tyrrhenum per aequor
@@ -762,7 +762,7 @@ civilis aut vis exiget otium,
 Non qui profundum Danuvium bibunt
 edicta rumpent Iulia, non Getae,
      non Seres infidique Persae,
-     non Tanain prope flumen orti.
+     non Tanain prope flumen orti. 
 
 Nosque et profestis lucibus et sacris
 inter iocosi munera Liberi
@@ -778,7 +778,7 @@ Lydis remixto carmine tibiis
 {
             id: 15,
             title: "CARMEN SAECVLARE",
-            content: `
+            textContent: `
 Phoebe silvarumque potens Diana,
 lucidum caeli decus, o colendi
 semper et culti, date quae precamur

@@ -1,5 +1,5 @@
 import {Collection} from "mongodb";
-import {Book} from "../../models/book";
+import {Book} from "../../models/book/book";
 import {User} from "../../models/user";
 import {Token} from "../../models/token";
 import {Word} from "../../models/word";

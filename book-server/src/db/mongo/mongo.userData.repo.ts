@@ -4,7 +4,7 @@ import {UserData} from "../../models/user.data";
 import {IUserDataRepo} from "../db.types";
 import {Word} from "../../models/word";
 import {ObjectId} from "mongodb";
-import {PartialBook} from "../../models/book";
+import {PartialBook} from "../../models/book/book";
 
 export class MongoUserDataRepo extends MongoRepo<UserData> implements IUserDataRepo {
     constructor(public collections: ICollections) {

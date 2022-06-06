@@ -21,12 +21,13 @@ export const TextStyle = styled.section`
     padding: 1rem;
   }
 `
+TextStyle.displayName = 'TextStyle'
 
 export const TextList = styled.ul`
   width: fit-content;
   margin: 0 1rem;
 `
-
+TextList.displayName = 'TextList'
 
 export const Word = styled.span`
   border-radius: 0.2rem;
@@ -37,6 +38,7 @@ export const Word = styled.span`
     cursor: pointer;
   }
 `
+Word.displayName = 'Word'
 
 export const LineStyled = styled.div`
   position: relative;
@@ -44,9 +46,11 @@ export const LineStyled = styled.div`
   
   & .line_index {
     position: absolute;
-    right: -1rem;
+    right: -2rem;
+    color: blue;
   }
 `
+LineStyled.displayName = 'LineStyled'
 
 export const PageButton = styled.button`
   font-size: 1.1rem;
@@ -63,3 +67,5 @@ export const PageMenu = styled.div`
   display: flex;
   flex-direction: row;
 `
+
+PageMenu.displayName = 'PageMenu'

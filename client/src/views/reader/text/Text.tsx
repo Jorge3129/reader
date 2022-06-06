@@ -1,11 +1,9 @@
 import React, {FC, useEffect, useMemo, useRef, useState} from 'react';
-import {PageMenu, TextStyle, Word} from "./styles";
+import {PageMenu, TextStyle} from "./styles";
 import {useSection} from "../../../hooks/reader/useSection";
-import {useDictionary} from "../../../hooks/reader/useDictionary";
 import SectionLink from "../content-table/SectionLink";
-import CopyButton from "../../reusable/CopyButton";
+import {CopyButton} from "../../reusable/icons/IconButtons";
 import SectionText from "./SectionText";
-import SectionText2 from "./SectionText2";
 
 interface IProps {
 
@@ -22,11 +20,15 @@ const Text: FC<IProps> = () => {
         if (scrollRef.current) scrollRef.current.scrollTo({top: 0})
     }, [section])
 
+    const PAGE_SIZE = 50;
+    const START = page ? PAGE_SIZE * (page - 1) : 0;
+    const END = PAGE_SIZE * (page + 1)
+
 
     const sectionTextPage = useMemo(() => {
-        return section && section.content
+        return section && section.textContent
             .split('\n')
-            .slice(0, 50 * (page + 1))
+            .slice(0, END)
             .join('\n')
     }, [section, page])
 
@@ -35,6 +37,7 @@ const Text: FC<IProps> = () => {
         if (!scrollRef?.current) return;
         const el = scrollRef.current;
         if (el.scrollHeight - el.scrollTop - el.clientHeight < 1) setPage(page + 1)
+        else if (el.scrollTop < 1 && page !== 0) setPage(page - 1)
     }
 
     if (!section) return <TextStyle/>;
@@ -43,16 +46,15 @@ const Text: FC<IProps> = () => {
         <TextStyle>
             <div className="container" ref={scrollRef} onScroll={onScroll}>
                 <h2 className="section_title">{section.title}</h2>
-                {/*<SectionText sectionTextPage={sectionTextPage}/>*/}
-                <SectionText2 sectionTextPage={sectionTextPage}/>
+                <SectionText sectionTextPage={sectionTextPage}/>
                 <PageMenu>
                     {!section.first && <SectionLink className={"next_section_link"} section={section}
                                                     step={-1}>&lt; Prev</SectionLink>}
                     {!section.last &&
                         <SectionLink className={"next_section_link"} section={section} step={1}>Next &gt;</SectionLink>}
                     <CopyButton onClick={async e => {
-                        await navigator.clipboard.writeText(section.content)
-                        alert(`Copied to clipboard: \n"${section.content.slice(0, 30)}..."`)
+                        await navigator.clipboard.writeText(section.textContent)
+                        alert(`Copied to clipboard: \n"${section.textContent.slice(0, 30)}..."`)
                     }}/>
                 </PageMenu>
             </div>

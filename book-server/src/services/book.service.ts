@@ -1,7 +1,8 @@
 import {IBookRepo} from "../db/db.types";
 import {Query} from 'express-serve-static-core'
-import {PartialBook} from "../models/book";
-import {bookKeys, bookKeysList} from "../constants/bookKeys";
+import {SplitTextSection} from "../models/book/book";
+import {textToParagraphs} from "../utils/text/functions";
+import {computeNumberOfPages, filterBooks, paginate} from "../utils/book/book.page.utils";
 
 export class BookService {
 
@@ -10,42 +11,28 @@ export class BookService {
 
     async getBooksByQuery(query: Query) {
         const books = await this.bookRepo.getAllDescriptions()
-        const filtered = BookService.filterBooks(books, query)
-        return BookService.paginate(filtered, query)
+        const filtered = filterBooks(books, query)
+        return paginate(filtered, query).map(b => ({...b, id: b._id}))
+    }
+
+    async getBooksAndNumOfPages(query: Query) {
+        const books = await this.bookRepo.getAllDescriptions()
+        const filtered = filterBooks(books, query)
+        return {
+            books: paginate(filtered, query).map(b => ({...b, id: b._id})),
+            pages: computeNumberOfPages(filtered, query)
+        }
     }
 
     async getNumberOfPages(query: Query) {
         const books = await this.bookRepo.getAllDescriptions()
-        const length = BookService.filterBooks(books, query).length
-        const {sizeNum} = BookService.parseSizeAndPage(query)
-        return sizeNum ? Math.ceil(length / sizeNum) : 1
+        const filtered = filterBooks(books, query)
+        return computeNumberOfPages(filtered, query)
     }
 
-    private static filterBooks(books: PartialBook[], query: Query) {
-        return books.filter(book => bookKeysList
-            .reduce((acc: boolean, key: string) => {
-                const match = !query[key] || BookService.matchQueryToBook(key, query, book)
-                return acc && match
-            }, true)
-        )
-    }
-
-    private static paginate(books: PartialBook[], query: Query) {
-        const {pageNum, sizeNum} = BookService.parseSizeAndPage(query);
-        if (!sizeNum) return books;
-        return books.slice((pageNum - 1) * sizeNum, pageNum * sizeNum)
-    }
-
-    private static parseSizeAndPage(query: Query) {
-        const {size, page} = query;
-        const pageNum = parseInt(page + '') || 1;
-        const sizeNum = parseInt(size + '');
-        return {pageNum, sizeNum}
-    }
-
-    private static matchQueryToBook(key: string, query: Query, book: PartialBook): boolean {
-        return key === bookKeys.genre ?
-            !!book.genre?.includes(query[key] + '')
-            : query[key] === book[key]
+    async getSplitSection(bookId: string, sectionId: string): Promise<SplitTextSection> {
+        const section = await this.bookRepo.getSection(bookId, sectionId);
+        const paragraphs = textToParagraphs(section.textContent)
+        return {...section, paragraphs, textContent: undefined}
     }
 }

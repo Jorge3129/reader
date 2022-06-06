@@ -1,10 +1,10 @@
-import {BookSection} from "../../models/book";
+import {TextSection} from "../../models/book/book";
 
-export const arr3: BookSection[] = [
+export const arr3: TextSection[] = [
     {
             id: 0,
             title: "I",
-            content: `
+            textContent: `
 Odi profanum volgus et arceo.
 Favete linguis: carmina non prius
      audita Musarum sacerdos
@@ -69,7 +69,7 @@ sublime ritu moliar atrium?
 {
             id: 1,
             title: "II",
-            content: `
+            textContent: `
 Angustam amice pauperiem pati
 robustus acri militia puer
      condiscat et Parthos ferocis
@@ -114,7 +114,7 @@ neglectus incesto addidit integrum,
 {
             id: 2,
             title: "III",
-            content: `
+            textContent: `
 Iustum et tenacem propositi virum
 non civium ardor prava iubentium,
      non voltus instantis tyranni
@@ -209,7 +209,7 @@ quo, Musa, tendis? Desine pervicax
 {
             id: 3,
             title: "IV",
-            content: `
+            textContent: `
 Descende caelo et dic age tibia
 regina longum Calliope melos,
      seu voce nunc mavis acuta
@@ -314,7 +314,7 @@ reliquit ales, nequitiae additus
 {
             id: 4,
             title: "V",
-            content: `
+            textContent: `
 Caelo tonantem credidimus Iovem
 regnare: praesens divus habebitur
      Augustus adiectis Britannis
@@ -389,7 +389,7 @@ diiudicata lite relinqueret,
 {
             id: 5,
             title: "VI",
-            content: `
+            textContent: `
 Delicta maiorum inmeritus lues,
 Romane, donec templa refeceris
      aedisque labentis deorum et
@@ -455,7 +455,7 @@ aetas parentum, peior avis, tulit
 {
             id: 6,
             title: "VII",
-            content: `
+            textContent: `
 Quid fles, Asterie, quem tibi candidi
 primo restituent vere Favonii
      Thyna merce beatum,
@@ -500,7 +500,7 @@ sub cantu querulae despice tibiae
 {
             id: 7,
             title: "VIII",
-            content: `
+            textContent: `
 Martis caelebs quid agam Kalendis,
 quid velint flores et acerra turis
 plena miraris positusque carbo in
@@ -540,7 +540,7 @@ dona praesentis cape laetus horae,
 {
             id: 8,
             title: "IX",
-            content: `
+            textContent: `
      'Donec gratus eram tibi
 nec quisquam potior bracchia candidae
      cervici iuvenis dabat,
@@ -570,7 +570,7 @@ tecum vivere amem, tecum obeam lubens.'
 {
             id: 9,
             title: "X",
-            content: `
+            textContent: `
 Extremum Tanain si biberes, Lyce,
 saevo nupta viro, me tamen asperas
 porrectum ante foris obicere incolis
@@ -600,7 +600,7 @@ non hoc semper erit liminis aut aquae
 {
             id: 10,
             title: "XI",
-            content: `
+            textContent: `
 Mercuri, - nam te docilis magistro
 movit Amphion lapides canendo, -
 tuque testudo resonare septem
@@ -670,7 +670,7 @@ omine et nostri memorem sepulcro
 {
             id: 11,
             title: "XII",
-            content: `
+            textContent: `
 Miserarum est neque amori dare ludum neque dulci
      mala vino lavere aut exanimari
      metuentis patruae verbera linguae.
@@ -691,7 +691,7 @@ catus idem per apertum fugientis agitato
 {
             id: 12,
             title: "XIII",
-            content: `
+            textContent: `
 O fons Bandusiae splendidior vitro,
 dulci digne mero non sine floribus,
      cras donaberis haedo,
@@ -716,7 +716,7 @@ me dicente cavis impositam ilicem
 {
             id: 13,
             title: "XIV",
-            content: `
+            textContent: `
 Herculis ritu modo dictus, o plebs,
 morte venalem petiisse laurum,
 Caesar Hispana repetit penatis
@@ -756,7 +756,7 @@ non ego hoc ferrem calidus iuventa
 {
             id: 14,
             title: "XV",
-            content: `
+            textContent: `
      Uxor pauperis Ibyci,
 tandem nequitiae fige modum tuae
      famosisque laboribus;
@@ -778,7 +778,7 @@ nec poti vetulam faece tenus cadi.
 {
             id: 15,
             title: "XVI",
-            content: `
+            textContent: `
 Inclusam Danaen turris aenea
 robustaeque fores et vigilum canum
 tristes excubiae munierant satis
@@ -838,7 +838,7 @@ desunt multa; bene est cui deus obtulit
 {
             id: 16,
             title: "XVII",
-            content: `
+            textContent: `
 Aeli vetusto nobilis ab Lamo -
 quando et priores hinc Lamias ferunt
      denominatos et nepotum
@@ -863,7 +863,7 @@ conpone lignum; cras Genium mero
 {
             id: 17,
             title: "XVIII",
-            content: `
+            textContent: `
 Faune, Nympharum fugientum amator,
 per meos finis et aprica rura
 lenis incedas abeasque parvis
@@ -888,7 +888,7 @@ gaudet invisam pepulisse fossor
 {
             id: 18,
             title: "XIX",
-            content: `
+            textContent: `
      Quantum distet ab Inacho
 Codrus, pro patria non timidus mori,
      narras, et genus Aeaci,
@@ -922,7 +922,7 @@ me lentus Glycerae torret amor meae.
 {
             id: 19,
             title: "XX",
-            content: `
+            textContent: `
 Non vides quanto moveas periclo,
 Pyrrhe, Gaetulae catulos leaenae?
 Dura post paulo fugies inaudax
@@ -947,7 +947,7 @@ qualis aut Nireus fuit aut aquosa
 {
             id: 20,
             title: "XXI",
-            content: `
+            textContent: `
 O nata mecum consule Manlio,
 seu tu querellas sive geris iocos
      seu rixam et insanos amores
@@ -982,7 +982,7 @@ segnesque nodum solvere Gratiae
 {
             id: 21,
             title: "XXII",
-            content: `
+            textContent: `
 Montium custos nemorumque virgo,
 quae laborantis utero puellas
 ter vocata audis adimisque leto,
@@ -997,7 +997,7 @@ verris obliquom meditantis ictum
 {
             id: 22,
             title: "XXIII",
-            content: `
+            textContent: `
 Caelo supinas si tuleris manus
 nascente luna, rustica Phidyle,
      si ture placaris et horna
@@ -1027,7 +1027,7 @@ non sumptuosa blandior hostia
 {
             id: 23,
             title: "XXIV",
-            content: `
+            textContent: `
      Intactis opulentior
 thesauris Arabum et divitis Indiae
      caementis licet occupes
@@ -1097,7 +1097,7 @@ curtae nescio quid semper abest rei.
 {
             id: 24,
             title: "XXV",
-            content: `
+            textContent: `
      Quo me, Bacche, rapis tui
 plenum? Quae nemora aut quos agor in specus
      velox mente nova? Quibus
@@ -1123,7 +1123,7 @@ cingentem viridi tempora pampino.
 {
             id: 25,
             title: "XXVI",
-            content: `
+            textContent: `
 Vixi puellis nuper idoneus
 et militavi non sine gloria;
      nunc arma defunctumque bello
@@ -1143,7 +1143,7 @@ Memphin carentem Sithonia niue
 {
             id: 26,
             title: "XXVII",
-            content: `
+            textContent: `
 Impios parrae recinentis omen
 ducat et praegnans canis aut ab agro
 rava decurrens lupa Lanuvino
@@ -1243,7 +1243,7 @@ disce fortunam; tua sectus orbis
 {
             id: 27,
             title: "XXVIII",
-            content: `
+            textContent: `
      Festo quid potius die
 Neptuni faciam? Prome reconditum,
      Lyde, strenua Caecubum
@@ -1265,7 +1265,7 @@ dicetur merita Nox quoque nenia.
 {
             id: 28,
             title: "XXIX",
-            content: `
+            textContent: `
 Tyrrhena regum progenies, tibi
 non ante verso lene merum cado
      cum flore, Maecenas, rosarum et
@@ -1342,7 +1342,7 @@ malus procellis, ad miseras preces
      ne Cypriae Tyriaeque merces
 
 addant avaro divitias mari;
-tunc me biremis praesidio scaphae
+tunc me biremis praesidio scaphae 
      tutum per Aegaeos tumultus
      aura feret geminusque Pollux.
 `
@@ -1350,7 +1350,7 @@ tunc me biremis praesidio scaphae
 {
             id: 29,
             title: "XXX",
-            content: `
+            textContent: `
 Exegi monumentum aere perennius
 regalique situ pyramidum altius,
 quod non imber edax, non Aquilo inpotens

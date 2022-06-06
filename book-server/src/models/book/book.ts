@@ -1,4 +1,5 @@
 import {Document, ObjectId} from "mongodb";
+import {Paragraph} from "../../utils/text/types";
 
 export type BookType = "poetry" | "prose" | "drama"
 
@@ -19,17 +20,23 @@ export interface PartialBookSection extends Document {
     type?: string
 }
 
-export type FlatBookSection = PartialBookSection & {
-    content: string
+export type TextSection = PartialBookSection & {
+    textContent: string
+}
+
+export type SplitTextSection = PartialBookSection & {
+    paragraphs: Paragraph[]
 }
 
 export type FlatBook = PartialBook & {
-    content: FlatBookSection[]
+    content: TextSection[]
 }
 
-export type BookSection = PartialBookSection & {
-    content: string | BookSection[]
+export type ContainerSection = PartialBookSection & {
+    children: Array<TextSection | ContainerSection>
 }
+
+export type BookSection = TextSection | ContainerSection
 
 export type Book = PartialBook & {
     content: BookSection[]

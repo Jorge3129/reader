@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {AddButton, DeleteButton} from "../../reusable/CopyButton";
+import {AddButton, DeleteButton} from "../../reusable/icons/IconButtons";
 import light from "../../../providers/theme/themes/light";
 
 

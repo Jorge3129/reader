@@ -10,6 +10,7 @@ export const useFetchOneBook = () => {
     const {content} = useAppSelector(selectReader)
     const {bookIdParam, sectionId} = useParams()
     const {choosePath, path, loading} = useSection()
+    const navigate = useNavigate()
 
     useEffect(() => {
         // console.log(chosenBook?.id, bookIdParam, chosenBook?.id === bookIdParam)
@@ -18,7 +19,9 @@ export const useFetchOneBook = () => {
         ) dispatch(readerThunk(bookIdParam))
     }, [])
 
+
     useEffect(() => {
+        if (sectionId === undefined) navigate('0')
         if (sectionId === undefined || !content) return;
         const sectionIdNumber = parseInt(sectionId || "")
         const newSect = content[sectionIdNumber];

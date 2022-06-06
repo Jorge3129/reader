@@ -1,4 +1,6 @@
-export const mockOdes2 = {
+import {Book} from "../../models/book/book";
+
+export const mockOdes2: Book = {
     title: "Mock Odes 2",
     author: "Someone",
     language: "English",
@@ -7,62 +9,62 @@ export const mockOdes2 = {
         {
             title: "I",
             type: "Book",
-            content: "Book 1"
+            textContent: "Book 1"
         },
         {
             title: "II",
             type: "Book",
-            content: [
+            children: [
                 {
                     title: "I",
                     type: "Ode",
-                    content: "Book 2 Section 1 Ode 1"
+                    textContent: "Book 2 Section 1 Ode 1"
                 },
                 {
                     title: "I",
                     type: "Section",
-                    content: [
+                    children: [
                         {
                             title: "I",
                             type: "Ode",
-                            content: "Book 2 Section 1 Ode 1"
+                            textContent: "Book 2 Section 1 Ode 1"
                         },
                         {
                             title: "II",
                             type: "Ode",
-                            content: "Book 2 Section 1 Ode 2"
+                            textContent: "Book 2 Section 1 Ode 2"
                         },
                     ]
                 },
                 {
                     title: "II",
                     type: "Section",
-                    content: [
+                    children: [
                         {
                             title: "I",
                             type: "Ode",
-                            content: "Book 2 Section 2 Ode 1"
+                            textContent: "Book 2 Section 2 Ode 1"
                         },
                         {
                             title: "II",
                             type: "Ode",
-                            content: "Book 2 Section 2 Ode 2"
+                            textContent: "Book 2 Section 2 Ode 2"
                         },
                     ]
                 },
                 {
                     title: "III",
                     type: "Section",
-                    content: [
+                    children: [
                         {
                             title: "I",
                             type: "Ode",
-                            content: "Book 2 Section 3 Ode 1"
+                            textContent: "Book 2 Section 3 Ode 1"
                         },
                         {
                             title: "II",
                             type: "Ode",
-                            content: "Book 2 Section 3 Ode 2"
+                            textContent: "Book 2 Section 3 Ode 2"
                         },
                     ]
                 },

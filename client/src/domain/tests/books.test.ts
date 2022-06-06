@@ -1,4 +1,4 @@
-import {flattenDeepBookContent} from "../entities/book.utils";
+import {flattenBookContent} from "../entities/book/book.utils";
 
 describe('flatten book content', () => {
 
@@ -6,23 +6,23 @@ describe('flatten book content', () => {
         const book = [
             {
                 title: "Part 1",
-                content: [
-                    {title: "Chapter 1", content: "Chapter 1",},
-                    {title: "Chapter 2", content: "Chapter 2",},
-                    {title: "Chapter 3", content: "Chapter 3",},
+                children: [
+                    {title: "Chapter 1", textContent: "Chapter 1",},
+                    {title: "Chapter 2", textContent: "Chapter 2",},
+                    {title: "Chapter 3", textContent: "Chapter 3",},
                 ]
             },
             {
                 title: "Part 2",
-                content: [
-                    {title: "Chapter 4", content: "Chapter 4",},
-                    {title: "Chapter 5", content: "Chapter 5",},
-                    {title: "Chapter 6", content: "Chapter 6",},
+                children: [
+                    {title: "Chapter 4", textContent: "Chapter 4",},
+                    {title: "Chapter 5", textContent: "Chapter 5",},
+                    {title: "Chapter 6", textContent: "Chapter 6",},
                     {
-                        title: "Part 2 Section 1", content: [
-                            {title: "Chapter 7", content: "Chapter 7",},
-                            {title: "Chapter 8", content: "Chapter 8",},
-                            {title: "Chapter 9", content: "Chapter 9",},
+                        title: "Part 2 Section 1", children: [
+                            {title: "Chapter 7", textContent: "Chapter 7",},
+                            {title: "Chapter 8", textContent: "Chapter 8",},
+                            {title: "Chapter 9", textContent: "Chapter 9",},
                         ]
                     }
                 ]
@@ -32,7 +32,7 @@ describe('flatten book content', () => {
             .fill({})
             .map((_, i) => ({title: `Chapter ${i + 1}`, content: `Chapter ${i + 1}` }))
 
-        expect(flattenDeepBookContent(book)).toEqual(result)
+        expect(flattenBookContent(book)).toEqual(result)
     })
 })
 

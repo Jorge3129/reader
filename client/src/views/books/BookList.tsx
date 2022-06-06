@@ -1,11 +1,11 @@
 import {FC} from "react";
-import {Book} from "../../domain/entities/books";
+import {Book, BookDescription} from "../../domain/entities/book/books";
 import {SortOption} from "../../domain/types";
 import {DictEntryStyle} from "../reader/dictionary/styles";
 import {StyledLink} from "../reusable/StyledLink";
 
 interface IProps {
-    books: Book[]
+    books: BookDescription[]
     sort?: SortOption
     setSort: Function
 }

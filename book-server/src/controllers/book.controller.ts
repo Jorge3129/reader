@@ -27,13 +27,18 @@ export class BookController {
 
     async getBookDescriptions(req: Request, res: Response) {
         try {
-            const books = await this.bookService.getBooksByQuery(req.query)
-            res.status(200).send(books.map(b => ({...b, id: b._id})));
+            const {noPages} = req.query
+            if (noPages !== "true") {
+                const {books, pages} = await this.bookService.getBooksAndNumOfPages(req.query)
+                res.status(200).send({books, pages});
+            } else {
+                const books = await this.bookService.getBooksByQuery(req.query)
+                res.status(200).send({books});
+            }
         } catch (error: any) {
             res.status(500).send(error.message)
         }
     }
-
 
     async getNumberOfPages(req: Request, res: Response) {
         try {
@@ -46,8 +51,8 @@ export class BookController {
     async getSection(req: Request, res: Response, next: NextFunction) {
         try {
             const {bookId, sectionId} = req.params;
-            const section = await this.bookRepo.getSection(bookId, sectionId);
-            res.status(200).send(section);
+            const section = await this.bookService.getSplitSection(bookId, sectionId);
+            res.status(200).json(section);
         } catch (e) {
             next(e)
         }

@@ -1,4 +1,4 @@
-import {ContentTableSection} from "../../../domain/entities/books";
+import {ContentTableSection} from "../../../domain/entities/book/books";
 import React, {FC} from "react";
 import {useSection} from "../../../hooks/reader/useSection";
 import ContentSection from "./ContentSection";

@@ -1,10 +1,10 @@
 import {ObjectId} from "mongodb";
-import {Book, BookSection, FlatBookSection, PartialBook} from "../../models/book";
+import {Book, ContainerSection, TextSection, PartialBook} from "../../models/book/book";
 import {IBookRepo} from "../db.types";
 import {ICollections} from "./types";
 import {MongoRepo} from "./mongorepo";
 import {ApiError} from "../../exceptions/api-error";
-import {flattenBookContent} from "../../models/book.utils";
+import {flattenBookContent} from "../../utils/book/book.format.utils";
 
 export class MongoBookRepo extends MongoRepo<Book> implements IBookRepo {
 
@@ -26,7 +26,7 @@ export class MongoBookRepo extends MongoRepo<Book> implements IBookRepo {
             .project({content: 0}).toArray() as PartialBook[]
     }
 
-    async getSection(bookId: string, sectionId: string): Promise<FlatBookSection> {
+    async getSection(bookId: string, sectionId: string): Promise<TextSection> {
         const numSectionId = parseInt(sectionId);
         if (isNaN(numSectionId)) throw ApiError.BadRequest(`Incorrect section id`)
         const book = await this.collections.books.findOne({_id: new ObjectId(bookId)})

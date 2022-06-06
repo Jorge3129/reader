@@ -1,8 +1,13 @@
 import {BOOK_SERVER_URL} from "../constants/api";
-import {Book, BookDescription, DeepBook} from "../domain/entities/books";
+import {Book, BookDescription, DeepBook, PartialBook} from "../domain/entities/book/books";
 import {httpClient} from "./http.client";
 
 const MY_URL = BOOK_SERVER_URL + '/books/'
+
+export interface BookResponse {
+    books: BookDescription[]
+    pages?: number
+}
 
 export class BookApi {
     static async getBookById(id: string): Promise<DeepBook | undefined> {
@@ -14,13 +19,13 @@ export class BookApi {
         }
     }
 
-    static async getBookDescriptions(params?: Object): Promise<BookDescription[]> {
+    static async getBookDescriptions(params?: Object): Promise<BookResponse> {
         try {
             const res = await httpClient
-                .get<BookDescription[]>(MY_URL + 'descriptions', {params})
+                .get<BookResponse>(MY_URL + 'descriptions', {params})
             return res.data
         } catch (e) {
-            return []
+            return {books: []}
         }
     }
 

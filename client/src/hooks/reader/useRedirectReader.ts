@@ -7,6 +7,7 @@ export const useRedirectReader = () => {
     const navigate = useNavigate()
     const {chosenBook, section} = useAppSelector(selectReader)
     useEffect(() => {
-        if (chosenBook) navigate(`/reader/${chosenBook.id}/${section?.uid || 0}`);
+        if (chosenBook?.id) navigate(`/reader/${chosenBook.id}/${section?.uid || 0}`);
+        else navigate('/reader')
     }, [])
 }

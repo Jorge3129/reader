@@ -1,8 +1,8 @@
 import {useAppDispatch} from "../../domain/store/hooks";
 import {useSelector} from "react-redux";
 import {selectReader, setPath} from "../../domain/reducers/reader.reducer";
-import {ContentTableSection} from "../../domain/entities/books";
-import {sectionIsOpen} from "../../domain/entities/section.utils";
+import {ContentTableSection} from "../../domain/entities/book/books";
+import {sectionIsOpen} from "../../domain/entities/book/section.utils";
 
 export const useSection = () => {
     const dispatch = useAppDispatch()
@@ -13,7 +13,9 @@ export const useSection = () => {
             if (section.depth !== undefined)
                 newPath[section.depth] = -1
             dispatch(setPath(newPath))
-        } else dispatch(setPath(section.path))
+        } else {
+            dispatch(setPath(section.path))
+        }
     }
 
     return {

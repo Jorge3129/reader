@@ -1,4 +1,4 @@
-import {Book, FlatBookSection, PartialBook} from "../models/book";
+import {Book, TextSection, PartialBook} from "../models/book/book";
 import {User} from "../models/user";
 import {Token} from "../models/token";
 import {DeleteResult, Document, Filter, InsertOneResult, ObjectId, UpdateOneModel, UpdateResult} from "mongodb";
@@ -30,7 +30,7 @@ export interface IBookRepo extends IRepo<Book>{
     getAll: () => Promise<Book[]>
     deleteAll: () => Promise<any>
     getAllDescriptions: () => Promise<PartialBook[]>
-    getSection: (bookId: string, sectionId: string) => Promise<FlatBookSection>
+    getSection: (bookId: string, sectionId: string) => Promise<TextSection>
 }
 
 export interface IUserRepo extends IRepo<User>{

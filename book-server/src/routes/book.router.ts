@@ -9,8 +9,8 @@ export const getBookRouter = (db: IDBService) => {
     const controller = new BookController(db.books, bookService)
     bookRouter.get('/', controller.getAllBooks.bind(controller))
     bookRouter.get('/descriptions', controller.getBookDescriptions.bind(controller))
-    bookRouter.get('/descriptions/pages', controller.getNumberOfPages.bind(controller))
     bookRouter.get('/:id', controller.getBookById.bind(controller))
+    bookRouter.get('/:bookId/:sectionId', controller.getSection.bind(controller))
     return bookRouter;
 }
 
