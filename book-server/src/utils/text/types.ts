@@ -7,19 +7,16 @@ export interface Line {
     key: string
     words: Word[]
     number: number
+    last?: boolean
+}
+
+export interface LineString {
+    line: string
+    last?: boolean
+    key: string
 }
 
 export interface Paragraph {
     key: string
     lines: Line[]
-}
-
-export interface ParAcc {
-    parArr: Paragraph[],
-    parIx: number
-}
-
-export interface LineAcc {
-    lineArr: Line[],
-    lineIx: number
 }

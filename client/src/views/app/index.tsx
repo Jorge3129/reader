@@ -1,6 +1,6 @@
 import styled, {ThemeProvider} from "styled-components";
 import {useAppSelector} from "../../domain/store/hooks";
-import {selectSettings} from "../../domain/reducers/settings.reducer";
+import {selectSettings} from "../../domain/reducers/user/settings.reducer";
 import {getTheme} from "../../providers/theme/getTheme";
 import App from "./App";
 

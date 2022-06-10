@@ -22,7 +22,7 @@ export const ContentTableStyle = styled.section`
     justify-content: stretch;
     align-items: stretch;
     overflow-y: scroll;
-    transition: all 0.5s ease;
+    transition: width 0.5s ease;
   }
 
   &.closed .container {

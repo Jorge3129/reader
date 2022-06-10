@@ -1,8 +1,9 @@
 import {useAppDispatch} from "../../domain/store/hooks";
 import {useSelector} from "react-redux";
-import {selectReader, setPath} from "../../domain/reducers/reader.reducer";
+import {selectReader, setPath} from "../../domain/reducers/reader/reader.reducer";
 import {ContentTableSection} from "../../domain/entities/book/books";
 import {sectionIsOpen} from "../../domain/entities/book/section.utils";
+import {selectSection} from "../../domain/reducers/reader/section.reducer";
 
 export const useSection = () => {
     const dispatch = useAppDispatch()
@@ -19,7 +20,7 @@ export const useSection = () => {
     }
 
     return {
-        ...useSelector(selectReader),
+        ...useSelector(selectSection),
         choosePath,
     }
 }

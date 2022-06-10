@@ -14,7 +14,8 @@ export class MongoBookRepo extends MongoRepo<Book> implements IBookRepo {
 
     async getOne(id: string): Promise<Book | null> {
         const query = {_id: new ObjectId(id)};
-        return await this.collections.books.findOne(query) as Book | null
+        const book = await this.collections.books.findOne(query) as Book | null
+        return Object.assign({id: book?._id}, book)
     }
 
     async getAll(): Promise<Book[]> {

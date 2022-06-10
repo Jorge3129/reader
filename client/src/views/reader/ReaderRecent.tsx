@@ -3,7 +3,7 @@ import MainContent from "../page/MainContent";
 import {Content} from "../page/styles";
 import UserDataApi from "../../api/userData.api";
 import {useAppSelector} from "../../domain/store/hooks";
-import {selectUser} from "../../domain/reducers/user.reducer";
+import {selectUser} from "../../domain/reducers/user/user.reducer";
 import {StyledLink} from "../reusable/StyledLink";
 import {BookDescription} from "../../domain/entities/book/books";
 import {useRedirectReader} from "../../hooks/reader/useRedirectReader";
@@ -37,7 +37,7 @@ const ReaderRecent: FC<IProps> = () => {
             <ul>{books.map(b =>
                 <DictEntryStyle key={b.id}>
                     <StyledLink to={b.id + '/0'}>
-                        <span style={{color: "blue"}}>{b.title}</span>
+                        <span className="highlight">{b.title}</span>
                     </StyledLink>
                     <div> by {b.author} </div>
                 </DictEntryStyle>)}

@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../domain/store/hooks";
-import {selectWord} from "../../domain/reducers/word.reducer";
-import {wordThunk} from "../../domain/reducers/word.thunk";
+import {selectWord} from "../../domain/reducers/dictionary/word.reducer";
+import {wordThunk} from "../../domain/reducers/dictionary/word.thunk";
 
 export const useDictionary = () => {
     const dispatch = useAppDispatch()

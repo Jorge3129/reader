@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {setUser, setLoading} from "./user.reducer";
-import AuthApi from "../../api/auth.api";
-import {saveToStorage} from "../../services/browser/storage";
+import AuthApi from "../../../api/auth.api";
+import {saveToStorage} from "../../../services/browser/storage";
 
 export const userThunk = createAsyncThunk("books/get",
     async (_: void, thunkApi) => {

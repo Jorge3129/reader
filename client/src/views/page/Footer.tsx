@@ -1,5 +1,5 @@
 import React from 'react';
-import {FooterStyled} from "./styles";
+import styled from "styled-components";
 
 const Footer = () => {
     return (
@@ -8,5 +8,16 @@ const Footer = () => {
         </FooterStyled>
     );
 };
+
+export const FooterStyled = styled.footer`
+  width: 100%;
+  background-color: black;
+  justify-self: flex-end;
+  display: grid;
+  place-content: center;
+  color: ${props => props.theme.light_color};
+  padding: 1rem;
+`
+FooterStyled.displayName = 'FooterStyled'
 
 export default Footer;

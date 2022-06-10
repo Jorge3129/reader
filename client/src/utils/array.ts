@@ -5,3 +5,8 @@ export const equal = (a: any[], b: any[]) => {
     }
     return true;
 }
+
+
+export const createRange = (length: number) => {
+    return new Array(length).fill(0).map((_, i) => i + 1)
+}

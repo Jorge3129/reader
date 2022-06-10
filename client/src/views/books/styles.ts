@@ -36,11 +36,16 @@ export const PageList = styled.ul`
     background-color: ${props => props.theme.color};
     padding: 0.2rem 0.5rem;
     margin: 0 0.5rem;
+    border-radius: 0.2rem;
   }
 
   & .page_list_item:hover {
     cursor: pointer;
     background-color: ${props => props.theme.lighterBg};
+  }
+
+  & .page_list_item.current {
+    background-color: ${props => props.theme.highlight};
   }
 `
 

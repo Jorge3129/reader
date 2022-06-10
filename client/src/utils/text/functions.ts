@@ -1,41 +1,26 @@
-import {LineAcc, ParAcc, Word, Line, Paragraph} from "./types";
+import {Word, Line, LineString} from "./types";
 
-const parAcc = (i: number): ParAcc => ({parArr: [], parIx: i});
-// const lineAcc: LineAcc = {lineArr: [], lineIx: 1};
-
-const lineToWords = (line: string, lineIx: number) => {
+const lineToWords = (line: string, key: string) => {
     return line.split(' ')
-        .map((word, wordIx): Word => ({
-            key: lineIx + word + wordIx,
+        .map((word, i): Word => ({
+            key: `${key}w${i}`,
             word
         }))
 }
 
-const paragraphToLines = (p: string, startLineNum: number): LineAcc => {
-    return p.split("\n")
-        .filter(line => line.replace(/\s/g, ""))
-        .reduce((lineAcc, line, lineIx) => {
-                const newLine = {
-                    key: line + lineIx,
-                    words: lineToWords(line, lineIx),
-                    number: lineAcc.lineIx
-                }
-                const lineArr = lineAcc.lineArr.concat(newLine)
-                return {lineArr, lineIx: lineAcc.lineIx + 1}
-            }, {lineArr: [], lineIx: startLineNum} as LineAcc
-        )
-}
-
-export const textToParagraphs = (sectionTextPage: string, start = 1, end?: number) =>
+export const textToLines = (sectionTextPage: string): Line[] =>
     sectionTextPage
         .replace(/\s{4,6}/g, '\n&nbsp; ')
         .split(/\n\n/g)
-        .reduce((acc: ParAcc, p: string, parIx: number) => {
-            const accRes = paragraphToLines(p, acc.parIx)
-            const newParagraph = {
-                key: parIx + '',
-                lines: accRes.lineArr
-            }
-            const parArr = acc.parArr.concat(newParagraph)
-            return {parArr, parIx: accRes.lineIx}
-        }, parAcc(start)).parArr
+        .reduce((acc: LineString[], p: string, parIx: number) => {
+            return acc.concat(p.split("\n")
+                .filter(line => line.replace(/\s/g, ""))
+                .map((line, i, {length}) => (
+                    {line, last: i === length - 1, key: `p${parIx}l${i}`}
+                )))
+        }, [])
+        .map(({line, key, last}, i) => ({
+            words: lineToWords(line, key),
+            number: i + 1,
+            key, last
+        }))

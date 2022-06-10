@@ -3,7 +3,7 @@ import {AddButtonWrap, DeleteButtonWrap, DictEntryStyle} from "./styles";
 import {Word} from "../../../domain/entities/words";
 import userDataApi from "../../../api/userData.api";
 import {useAppSelector} from "../../../domain/store/hooks";
-import {selectUser} from "../../../domain/reducers/user.reducer";
+import {selectUser} from "../../../domain/reducers/user/user.reducer";
 
 interface IProps {
     entry: Word

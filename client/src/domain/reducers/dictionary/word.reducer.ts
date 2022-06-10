@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {Word} from "../entities/words";
-import {RootState} from "../store/store";
+import {Word} from "../../entities/words";
+import {RootState} from "../../store/store";
 
 interface IBookState {
     query?: string

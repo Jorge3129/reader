@@ -1,15 +1,15 @@
 import React, {FC, useMemo, useState, MouseEvent} from 'react';
 import {BookTitleStyle, Close, ContentTableStyle} from "./styles";
-import {useSection} from "../../../hooks/reader/useSection";
 import ContentList from "./ContentList";
 import {useFixWidth} from "../../../hooks/reader/useFixWidth";
+import {useReader} from "../../../hooks/reader/useReader";
 
 interface IProps {
 }
 
 const ContentTable: FC<IProps> = () => {
 
-    const {structure, path, chosenBook} = useSection()
+    const {structure, path, chosenBook} = useReader()
     const [showTable, setShowTable] = useState(true)
     const {containerRef, onClose} = useFixWidth()
 

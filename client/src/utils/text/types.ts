@@ -20,13 +20,3 @@ export interface Paragraph {
     key: string
     lines: Line[]
 }
-
-export interface ParAcc {
-    parArr: Paragraph[],
-    parIx: number
-}
-
-export interface LineAcc {
-    lineArr: Line[],
-    lineIx: number
-}

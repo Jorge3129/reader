@@ -1,10 +1,10 @@
 import React, {FC, useMemo} from 'react';
 import {LineStyled, TextList, Word} from "./styles";
 import {useDictionary} from "../../../hooks/reader/useDictionary";
-import {textToLines} from "../../../utils/text/functions2";
+import {Line} from "../../../utils/text/types";
 
 interface IProps {
-    sectionTextPage?: string
+    lineList?: Line[]
 }
 
 const LineNumber = ({number}: { number: number }) => {
@@ -12,12 +12,9 @@ const LineNumber = ({number}: { number: number }) => {
     return <b className="line_index">{number}</b>
 }
 
-const SectionText: FC<IProps> = ({sectionTextPage}) => {
+const SectionText: FC<IProps> = ({lineList}) => {
 
     const {searchWord} = useDictionary()
-
-    const lineList = useMemo(() => sectionTextPage && textToLines(sectionTextPage),
-        [sectionTextPage])
 
     if (!lineList) return null;
 

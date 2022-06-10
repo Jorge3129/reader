@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../domain/store/hooks";
 import {useLocation, useNavigate} from "react-router-dom";
-import {selectUser, setUser} from "../../domain/reducers/user.reducer";
+import {selectUser, setUser} from "../../domain/reducers/user/user.reducer";
 import {LoginResponse, LoginValues} from "../../domain/types";
 import {authService} from "../../services/auth/auth.service";
 

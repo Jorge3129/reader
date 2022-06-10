@@ -47,7 +47,7 @@ export const LineStyled = styled.div`
   & .line_index {
     position: absolute;
     right: -2rem;
-    color: blue;
+    color: ${props => props.theme.highlight};
   }
 `
 LineStyled.displayName = 'LineStyled'

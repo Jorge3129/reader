@@ -1,6 +1,6 @@
 import React, {Component, FC, PropsWithChildren, useEffect} from 'react';
 import {useAppSelector} from "../../domain/store/hooks";
-import {selectUser} from "../../domain/reducers/user.reducer";
+import {selectUser} from "../../domain/reducers/user/user.reducer";
 import {Navigate, Route, useLocation} from "react-router-dom";
 import LoginPage from "./LoginPage";
 

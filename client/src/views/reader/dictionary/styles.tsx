@@ -27,9 +27,13 @@ export const DictEntryStyle = styled.div.attrs(
           props.theme.sidebarBg
   };
   border-radius: 0.3rem;
+  
+  & .highlight {
+    color: ${props => props.theme.highlight};
+  }
 
   & .word_type {
-    color: blue;
+    color: ${props => props.theme.highlight};
   }
 `
 DictEntryStyle.displayName = 'DictEntryStyle'

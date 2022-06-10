@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../store/store";
-import {User} from "../entities/user";
-import {Null} from "../types";
+import {RootState} from "../../store/store";
+import {User} from "../../entities/user";
+import {Null} from "../../types";
 
 interface UserState {
     user: Null<User>

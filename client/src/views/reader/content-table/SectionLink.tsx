@@ -4,7 +4,7 @@ import {NavLink, useParams, To} from "react-router-dom";
 import {StyledLink} from "../../reusable/StyledLink";
 
 interface LinkProps {
-    section: ContentTableSection
+    section: {uid?: number}
     step: -1 | 0 | 1
     content?: ContentTableSection[]
     className: string

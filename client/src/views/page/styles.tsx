@@ -53,14 +53,6 @@ export const Content = styled.div`
 `
 Content.displayName = 'Content'
 
-export const FooterStyled = styled.footer`
-  width: 100%;
-  color: white;
-  background-color: black;
-  justify-self: flex-end;
-`
-FooterStyled.displayName = 'FooterStyled'
-
 export const NavStyled = styled.nav`
   display: flex;
   flex-direction: row;
@@ -75,6 +67,10 @@ export const LinkStyled = styled(Link)`
 
   & span {
     margin: 0 1rem;
+  }
+  
+  & :hover {
+    color: ${props => props.theme.hover};
   }
 `
 LinkStyled.displayName = 'LinkStyled'

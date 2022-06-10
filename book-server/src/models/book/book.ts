@@ -1,5 +1,5 @@
 import {Document, ObjectId} from "mongodb";
-import {Paragraph} from "../../utils/text/types";
+import {Line} from "../../utils/text/types";
 
 export type BookType = "poetry" | "prose" | "drama"
 
@@ -25,7 +25,7 @@ export type TextSection = PartialBookSection & {
 }
 
 export type SplitTextSection = PartialBookSection & {
-    paragraphs: Paragraph[]
+    lines: Line[]
 }
 
 export type FlatBook = PartialBook & {
@@ -38,6 +38,15 @@ export type ContainerSection = PartialBookSection & {
 
 export type BookSection = TextSection | ContainerSection
 
+export type ContentTableSection = BookSection & {
+    path?: number[],
+    depth?: number
+}
+
 export type Book = PartialBook & {
     content: BookSection[]
+}
+
+export type ContentBook = PartialBook & {
+    content: ContentTableSection[]
 }

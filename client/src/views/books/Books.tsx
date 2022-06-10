@@ -5,8 +5,9 @@ import BookTable from "./BookTable";
 import {useSortFilterBooks} from "../../hooks/books/useSortFilterBooks";
 import BookList from "./BookList";
 import {useAppDispatch} from "../../domain/store/hooks";
-import {bookThunk} from "../../domain/reducers/books.thunk";
+import {bookThunk} from "../../domain/reducers/books/books.thunk";
 import {PageList} from "./styles";
+import Pagination from "./Pagination";
 
 const modes = ["table", "list"]
 
@@ -18,7 +19,7 @@ interface IParams {
 const Books = () => {
 
     useFetchBooks({size: 10, page: 1})
-    const {loading, books, pages} = useBooks()
+    const {loading, books} = useBooks()
     const {editedBooks, sort, chooseSort} = useSortFilterBooks(books)
     const [mode, setMode] = useState("table")
     const dispatch = useAppDispatch()
@@ -28,10 +29,6 @@ const Books = () => {
         dispatch(bookThunk(params))
     }
 
-    useEffect(() => {
-        console.log(pages)
-    }, [pages])
-
     const [params, setParams] = useState<IParams>({size: 10, page: 1})
 
     const modeMap = {
@@ -40,6 +37,12 @@ const Books = () => {
     } as { [key: string]: JSX.Element }
 
     const bookList = loading ? <h1>Loading...</h1> : modeMap[mode]
+
+    const handlePage = (ownPage: number, currentPage: number) => {
+        if (currentPage === ownPage) return;
+        setParams({...params, page: ownPage})
+        dispatch(bookThunk({page: ownPage, size: params?.size}))
+    }
 
     return (
         <MainContent title="Books">
@@ -55,21 +58,7 @@ const Books = () => {
                 />
                 <button>Ok</button>
             </form>
-            <PageList>{
-                pages !== 1 &&
-                new Array(pages).fill(0).map((_, i) =>
-                    <li key={'page' + i}
-                        style={params?.page === i + 1 ? {backgroundColor: 'blue'} : {}}
-                        className="page_list_item"
-                        onClick={e => {
-                            if (params?.page === i + 1) return;
-                            setParams({...params, page: i + 1})
-                            dispatch(bookThunk({page: i + 1, size: params?.size}))
-                        }
-                        }>
-                        {i + 1}
-                    </li>)}
-            </PageList>
+            <Pagination currentPage={params?.page} handlePage={handlePage}/>
             {bookList}
         </MainContent>
     );

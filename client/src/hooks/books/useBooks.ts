@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../../domain/store/hooks";
-import {selectBooks} from "../../domain/reducers/books.reducer";
+import {selectBooks} from "../../domain/reducers/books/books.reducer";
 import {useEffect} from "react";
-import {bookThunk} from "../../domain/reducers/books.thunk";
+import {bookThunk} from "../../domain/reducers/books/books.thunk";
 
 export const useBooks = () => {
     const {books, loading, pages} = useAppSelector(selectBooks)

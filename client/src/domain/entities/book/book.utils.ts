@@ -1,5 +1,5 @@
-import {BookSection, ContainerSection, ContentTableSection, TextSection} from "./books";
-import {isContainerSection, isTextSection} from "./typeGuards";
+import {BookSection, ContentTableSection, TextSection} from "./books";
+import {isTextSection} from "./typeGuards";
 
 export const sectionReducer = (array: BookSection[], section: BookSection): BookSection[] => {
     if (isTextSection(section)) return array.concat([section])

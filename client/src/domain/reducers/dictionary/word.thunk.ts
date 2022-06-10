@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {LatinApi} from "../../api/latin.api";
+import {LatinApi} from "../../../api/latin.api";
 import {setLoading, setResult} from "./word.reducer";
 
 export const wordThunk = createAsyncThunk("word/get",

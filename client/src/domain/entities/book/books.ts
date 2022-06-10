@@ -1,4 +1,4 @@
-import {Paragraph} from "../../../utils/text/types";
+import {Line} from "../../../utils/text/types";
 
 export type BookType = "poetry" | "prose" | "drama"
 
@@ -25,8 +25,16 @@ export type TextSection = PartialBookSection & {
     last?: boolean
 }
 
-export type SplitTextSection = PartialBookSection & {
-    paragraphs: Paragraph[]
+export type SplitTextSection = {
+    id?: number
+    uid: number
+    title: string
+    type?: string
+    path: number[],
+    depth: number
+    lines: Line[]
+    first?: boolean
+    last?: boolean
 }
 
 export type ContainerSection = PartialBookSection & {
@@ -46,6 +54,6 @@ export type DeepBook = PartialBook & {
 export type BookDescription = PartialBook
 
 export type ContentTableSection = BookSection & {
-    path?: number[],
+    path: number[],
     depth?: number
 }

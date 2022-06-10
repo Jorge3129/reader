@@ -4,7 +4,7 @@ import {Word} from "../../domain/entities/words";
 import DictEntry from "../reader/dictionary/DictEntry";
 import userDataApi from "../../api/userData.api";
 import {useAppSelector} from "../../domain/store/hooks";
-import {selectUser} from "../../domain/reducers/user.reducer";
+import {selectUser} from "../../domain/reducers/user/user.reducer";
 
 const Vocabulary = () => {
 

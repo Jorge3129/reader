@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {Book, BookDescription} from "../entities/book/books";
-import {RootState} from "../store/store";
-import {BookResponse} from "../../api/book.api";
+import {Book, BookDescription} from "../../entities/book/books";
+import {RootState} from "../../store/store";
+import {BookResponse} from "../../../api/book.api";
 
 interface IBookState {
     books: BookDescription[],

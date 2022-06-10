@@ -1,7 +1,7 @@
 import MainContent from "../page/MainContent";
 import {ReaderContent} from "./styles";
 import ContentTable from "./content-table/ContentTable";
-import Text from "./text/Text";
+import TextContainer from "./text/TextContainer";
 import Tools from "./Tools";
 import {useFetchOneBook} from "../../hooks/reader/useFetchOneBook";
 import {FC} from "react";
@@ -14,7 +14,6 @@ interface IProps {
 const Reader: FC<IProps> = () => {
 
     useSaveRecent()
-    useKeyNavigation()
     const {loading} = useFetchOneBook()
 
     if (loading) return <MainContent>
@@ -24,7 +23,7 @@ const Reader: FC<IProps> = () => {
     return (
         <ReaderContent>
             <ContentTable/>
-            <Text/>
+            <TextContainer/>
             <Tools/>
         </ReaderContent>
     );

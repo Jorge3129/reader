@@ -1,7 +1,7 @@
-import {THEMES, ThemeName} from "../../providers/theme/themeList";
-import {getFromStorage} from "../../services/browser/storage";
+import {THEMES, ThemeName} from "../../../providers/theme/themeList";
+import {getFromStorage} from "../../../services/browser/storage";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../store/store";
+import {RootState} from "../../store/store";
 
 
 interface SettingsState {

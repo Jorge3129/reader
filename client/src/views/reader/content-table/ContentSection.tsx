@@ -30,7 +30,7 @@ const ContentSection: FC<IProps> = ({section, path}) => {
         <ContentSectionLi>
             <span className={"section_title text_section" + classList}>
                 <SectionLink className={"content_link"} section={section} step={0}>
-                    {section.title}
+                    {section.title}TEXTs
                 </SectionLink>
             </span>
         </ContentSectionLi>)
@@ -42,7 +42,7 @@ const ContentSection: FC<IProps> = ({section, path}) => {
             <span className={"section_title list_section" + classList} onClick={e => onClick(e, section)}>
                 <Chevron isOpen={isOpen}/>
                 {topLevel && section?.type ? section.type + " " : ""} {
-                section.title}
+                section.title} CONTAINER {isOpen+''} sec.path {section.path+''} path {path+''}
             </span>
             {isOpen && contentSection}
         </ContentSectionLi>

@@ -1,7 +1,7 @@
 import {IBookRepo} from "../db/db.types";
 import {Query} from 'express-serve-static-core'
 import {SplitTextSection} from "../models/book/book";
-import {textToParagraphs} from "../utils/text/functions";
+import {textToLines} from "../utils/text/functions";
 import {computeNumberOfPages, filterBooks, paginate} from "../utils/book/book.page.utils";
 
 export class BookService {
@@ -32,7 +32,7 @@ export class BookService {
 
     async getSplitSection(bookId: string, sectionId: string): Promise<SplitTextSection> {
         const section = await this.bookRepo.getSection(bookId, sectionId);
-        const paragraphs = textToParagraphs(section.textContent)
-        return {...section, paragraphs, textContent: undefined}
+        const lines = textToLines(section.textContent)
+        return {...section, lines, textContent: undefined}
     }
 }
