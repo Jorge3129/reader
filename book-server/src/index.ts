@@ -6,7 +6,7 @@ import {RootRouter} from "./routes/root.router";
 import errorMiddleware from "./middlewares/error-middleware";
 const cors = require('cors')
 const app = express()
-const PORT = 9000;
+const PORT = 9002;
 const cookieParser = require('cookie-parser')
 
 app.use(express.json())
