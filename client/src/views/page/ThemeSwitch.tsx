@@ -1,6 +1,6 @@
 import {MouseEvent} from "react";
-import {useAppDispatch, useAppSelector} from "../../domain/store/hooks";
-import {selectSettings, setTheme} from "../../domain/reducers/user/settings.reducer";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import {selectSettings, setTheme} from "../../store/reducers/user/settings.reducer";
 import {THEMES} from "../../providers/theme/themeList";
 import {saveToStorage} from "../../services/browser/storage";
 import styled from "styled-components";
@@ -11,7 +11,7 @@ const ThemeSwitch = () => {
     const dispatch = useAppDispatch()
     const isDark = theme === THEMES.DARK;
     const inverse = isDark ? THEMES.LIGHT : THEMES.DARK
-    const icon = isDark ? icons.NIGHT : icons.DAY;
+    const icon = isDark ? icons.DAY : icons.NIGHT;
     // const themeName = titleCase(inverse)
 
     const toggleTheme = (e: MouseEvent<HTMLButtonElement>) => {

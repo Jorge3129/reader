@@ -1,7 +1,7 @@
-import {LoginResponse, LoginValues} from "../../domain/types";
+import {LoginResponse, LoginValues} from "../../models/types";
 import AuthApi from "../../api/auth.api"
 import {removeFromStorage, saveToStorage} from "../browser/storage";
-import {AuthResponse} from "../../domain/entities/auth";
+import {AuthResponse} from "../../models/auth";
 
 class AuthService {
     async login(data: LoginValues): Promise<AuthResponse> {

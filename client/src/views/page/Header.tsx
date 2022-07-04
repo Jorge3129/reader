@@ -2,10 +2,13 @@ import {routes} from "../../utils/routes";
 import {HeaderStyled, LinkStyled, NavStyled, TitleStyled} from "./styles";
 import {useAuth} from "../../hooks/auth/useAuth";
 import ThemeSwitch from "./ThemeSwitch";
+import {SubmitButton} from "../auth/styles";
+import {useNavigate} from "react-router-dom";
 
 const Header = () => {
 
     const {user, logOut} = useAuth()
+    const navigate = useNavigate();
 
     return (
         <HeaderStyled>
@@ -17,9 +20,10 @@ const Header = () => {
                     <LinkStyled className="link" to={route.path} key={route.path}>
                         <span>{route.title}</span>
                     </LinkStyled>)}
-                {user && <button onClick={logOut}>Logout</button>}
                 <ThemeSwitch/>
             </NavStyled>
+            {user && <SubmitButton onClick={logOut}>Logout</SubmitButton>}
+            {!user && <SubmitButton onClick={e => navigate('signup')}>Sign up</SubmitButton>}
         </HeaderStyled>
     );
 };

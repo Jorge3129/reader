@@ -4,10 +4,10 @@ import React, {useEffect, useState} from "react";
 import BookTable from "./BookTable";
 import {useSortFilterBooks} from "../../hooks/books/useSortFilterBooks";
 import BookList from "./BookList";
-import {useAppDispatch} from "../../domain/store/hooks";
-import {bookThunk} from "../../domain/reducers/books/books.thunk";
-import {PageList} from "./styles";
+import {useAppDispatch} from "../../store/hooks";
+import {bookThunk} from "../../store/reducers/books/books.thunk";
 import Pagination from "./Pagination";
+import Loader from "../reusable/loader/Loader";
 
 const modes = ["table", "list"]
 
@@ -19,24 +19,30 @@ interface IParams {
 const Books = () => {
 
     useFetchBooks({size: 10, page: 1})
-    const {loading, books} = useBooks()
+    const {loading, books, pages} = useBooks()
     const {editedBooks, sort, chooseSort} = useSortFilterBooks(books)
     const [mode, setMode] = useState("table")
     const dispatch = useAppDispatch()
 
+    const [params, setParams] = useState<IParams>({size: 10, page: 1})
+    const [pageSize, setPageSize] = useState<string>("10")
+
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault()
+        setParams({...params, size: parseInt(pageSize)})
         dispatch(bookThunk(params))
     }
 
-    const [params, setParams] = useState<IParams>({size: 10, page: 1})
+    useEffect(() => {
+       setParams({...params, page: 1})
+    }, [params.size])
 
     const modeMap = {
         "table": <BookTable sort={sort} setSort={chooseSort} books={editedBooks}/>,
         "list": <BookList sort={sort} setSort={chooseSort} books={editedBooks}/>,
     } as { [key: string]: JSX.Element }
 
-    const bookList = loading ? <h1>Loading...</h1> : modeMap[mode]
+    const bookList = loading ? <Loader/> : modeMap[mode]
 
     const handlePage = (ownPage: number, currentPage: number) => {
         if (currentPage === ownPage) return;
@@ -53,12 +59,12 @@ const Books = () => {
                 <label>Limit</label>
                 <input
                     type="number"
-                    value={params.size + ''}
-                    onChange={e => setParams({...params, size: parseInt(e.target.value)})}
+                    value={pageSize}
+                    onChange={e => setPageSize(e.target.value)}
                 />
                 <button>Ok</button>
             </form>
-            <Pagination currentPage={params?.page} handlePage={handlePage}/>
+            <Pagination currentPage={params?.page} size={params.size} handlePage={handlePage}/>
             {bookList}
         </MainContent>
     );

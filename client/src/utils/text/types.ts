@@ -1,16 +1,16 @@
-export interface Word {
+export interface IWord {
     key: string
     word: string
 }
 
-export interface Line {
+export interface ILine {
     key: string
-    words: Word[]
+    words: IWord[]
     number: number
     last?: boolean
 }
 
-export interface LineString {
+export interface ILineNotSplit {
     line: string
     last?: boolean
     key: string
@@ -18,5 +18,5 @@ export interface LineString {
 
 export interface Paragraph {
     key: string
-    lines: Line[]
+    lines: ILine[]
 }

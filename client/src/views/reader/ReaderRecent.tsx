@@ -2,10 +2,10 @@ import {FC, useEffect, useState} from "react";
 import MainContent from "../page/MainContent";
 import {Content} from "../page/styles";
 import UserDataApi from "../../api/userData.api";
-import {useAppSelector} from "../../domain/store/hooks";
-import {selectUser} from "../../domain/reducers/user/user.reducer";
+import {useAppSelector} from "../../store/hooks";
+import {selectUser} from "../../store/reducers/user/user.reducer";
 import {StyledLink} from "../reusable/StyledLink";
-import {BookDescription} from "../../domain/entities/book/books";
+import {BookDescription} from "../../models/book/books";
 import {useRedirectReader} from "../../hooks/reader/useRedirectReader";
 import {DictEntryStyle} from "./dictionary/styles";
 

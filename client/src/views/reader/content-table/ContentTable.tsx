@@ -24,7 +24,10 @@ const ContentTable: FC<IProps> = () => {
 
     return (
         <ContentTableStyle className={showTable ? "" : "closed"}>
-            <Close onClick={onClick}>X</Close>
+            <Close onClick={onClick}> {showTable ?
+                <i className="fa-solid fa-square-caret-left"></i> :
+                <i className="fa-solid fa-square-caret-right"></i>}
+            </Close>
             <div className="container" ref={containerRef}>
                 <BookTitleStyle className="book_title_container">
                     <div className="book_title">{chosenBook?.title || ""}</div>

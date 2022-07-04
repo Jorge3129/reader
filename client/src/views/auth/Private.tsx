@@ -1,6 +1,6 @@
 import React, {Component, FC, PropsWithChildren, useEffect} from 'react';
-import {useAppSelector} from "../../domain/store/hooks";
-import {selectUser} from "../../domain/reducers/user/user.reducer";
+import {useAppSelector} from "../../store/hooks";
+import {selectUser} from "../../store/reducers/user/user.reducer";
 import {Navigate, Route, useLocation} from "react-router-dom";
 import LoginPage from "./LoginPage";
 
@@ -20,12 +20,12 @@ const Private: FC<PropsWithChildren<IProps>> = ({children}) => {
         return <div>Loading</div>
     }
 
-    //if (!user) return <Navigate to={'/login'} state={{ from: location }} replace/>
-    if (!user) return <LoginPage/>
+    if (!user) return <Navigate to={'/login'} state={{ from: location }} replace/>
+    // if (!user) return <LoginPage/>
 
     return <>{children}</>
 };
 
-export const PrivateRoute = (Component: React.Component) => <Private>{}</Private>
+// export const withPrivateRoute = (Component: React.Component) => <Private><Component/></Private>
 
 export default Private;

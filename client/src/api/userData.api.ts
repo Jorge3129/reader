@@ -1,11 +1,11 @@
-import {Word} from "../domain/entities/words";
+import {IDictEntry} from "../models/words";
 import {httpClient} from "./http.client";
 import {BOOK_SERVER_URL} from "../constants/api";
 
 const MY_URL = BOOK_SERVER_URL + "/tools"
 
 class UserDataApi {
-    async addWord(word: Word, userId: string) {
+    async addWord(word: IDictEntry, userId: string) {
         return await httpClient.post(MY_URL + "/words/" + userId, {word})
     }
 

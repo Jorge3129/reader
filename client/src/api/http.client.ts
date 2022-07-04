@@ -1,7 +1,7 @@
 import axios, {AxiosRequestConfig} from "axios";
 import {BOOK_SERVER_URL} from "../constants/api";
 import {getFromStorage, saveToStorage} from "../services/browser/storage";
-import {AuthResponse} from "../domain/entities/auth";
+import {AuthResponse} from "../models/auth";
 
 const API_URL = BOOK_SERVER_URL
 

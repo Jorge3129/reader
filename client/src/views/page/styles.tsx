@@ -40,6 +40,7 @@ export const MainStyled = styled.div`
 
   & .main_title {
     text-align: center;
+    padding: 1rem;
   }
 `
 MainStyled.displayName = 'MainStyled'

@@ -7,6 +7,12 @@ export const equal = (a: any[], b: any[]) => {
 }
 
 
-export const createRange = (length: number) => {
-    return new Array(length).fill(0).map((_, i) => i + 1)
+export const createRange = (start: number, end: number) => {
+    try {
+        const length = end - start + 1;
+        console.log(length)
+        return new Array(end - start + 1).fill(0).map((_, i) => i + start)
+    } catch (e) {
+        return []
+    }
 }

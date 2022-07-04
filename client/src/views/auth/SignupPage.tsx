@@ -1,50 +1,61 @@
 import React from 'react';
 import {useAuth} from "../../hooks/auth/useAuth";
-import {SignupValues} from "../../domain/types";
-import {Field, Form, Formik, FormikHelpers} from "formik";
+import {SignupValues} from "../../models/types";
 import MainContent from "../page/MainContent";
+import {useForm} from "react-hook-form";
+import {FormStyled, SubmitButton} from "./styles";
+import Field from "./Field";
+import {useNavigate} from "react-router-dom";
 
 const SignupPage = () => {
     const {signUp} = useAuth()
 
-    const initialValues = {
+    const defaultValues = {
         firstName: '',
         lastName: '',
         email: '',
+        password: ''
     }
 
-    const handleSubmit = async (
-        values: SignupValues,
-        {setSubmitting}: FormikHelpers<SignupValues>
-    ) => {
-        //const result = await
-        alert(JSON.stringify(values, null, 2));
-        setSubmitting(false);
+    const {register, handleSubmit, formState} = useForm<SignupValues>({defaultValues});
+    const {errors} = formState;
+
+    const navigate = useNavigate();
+
+    const onSubmit = async (data: SignupValues) => {
+        console.log(formState.isValid)
+        if (!formState.isValid) {
+            return;
+        }
+        const error = await signUp(data);
+        if (error?.message) alert(error.message)
+        else navigate('/login')
+    }
+
+    const validatePassword = () => {
+
     }
 
     return (
-        <MainContent title="Signup">
-            <Formik
-                initialValues={initialValues}
-                onSubmit={handleSubmit}
-            >
-                <Form>
-                    <label htmlFor="firstName">First Name</label>
-                    <Field id="firstName" name="firstName" placeholder="John"/>
-
-                    <label htmlFor="lastName">Last Name</label>
-                    <Field id="lastName" name="lastName" placeholder="Doe"/>
-
+        <MainContent title="Sign up">
+            <FormStyled onSubmit={handleSubmit(onSubmit)}>
+                <Field error={errors.email}>
                     <label htmlFor="email">Email</label>
-                    <Field
-                        id="email"
-                        name="email"
-                        placeholder="johndoe@gmail.com"
-                        type="email"
-                    />
-                    <button type="submit">Submit</button>
-                </Form>
-            </Formik>
+                    <input {...register("email", {required: true})} placeholder="johndoe@gmail.com"/>
+                    <span>
+                        {errors.email && errors.email.type === "required" &&
+                            <span className="form_error">Email is required</span>}
+                    </span>
+                </Field>
+                <Field error={errors.password}>
+                    <label htmlFor="password">Password</label>
+                    <input type="password" {...register("password", {required: true, min: 2})} placeholder="password"/>
+                    <span>{errors.password && errors.password.type === "required" &&
+                        <span className="form_error">Password is required</span>}
+                    </span>
+                </Field>
+                <SubmitButton type="submit" onClick={e => console.log(formState.errors)}>Submit</SubmitButton>
+            </FormStyled>
         </MainContent>
     );
 };

@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {Book, BookDescription} from "../../domain/entities/book/books";
-import {SortOption} from "../../domain/types";
+import {Book, BookDescription} from "../../models/book/books";
+import {SortOption} from "../../models/types";
 import {DictEntryStyle} from "../reader/dictionary/styles";
 import {StyledLink} from "../reusable/StyledLink";
 

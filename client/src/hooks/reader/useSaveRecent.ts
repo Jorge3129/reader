@@ -1,8 +1,8 @@
 import {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import UserDataApi from "../../api/userData.api";
-import {useAppSelector} from "../../domain/store/hooks";
-import {selectUser} from "../../domain/reducers/user/user.reducer";
+import {useAppSelector} from "../../store/hooks";
+import {selectUser} from "../../store/reducers/user/user.reducer";
 
 
 export const useSaveRecent = () => {

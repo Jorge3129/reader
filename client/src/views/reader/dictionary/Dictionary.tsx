@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import DictEntry from "./DictEntry";
+import DictEntryItem from "./DictEntryItem";
 import {useDictionary} from "../../../hooks/reader/useDictionary";
 import {DictStyle} from "./styles";
+import Loader from "../../reusable/loader/Loader";
 
 interface IProps {
 
@@ -10,12 +11,12 @@ interface IProps {
 const Dictionary:FC<IProps> = () => {
 
     const {result, loading} = useDictionary()
-    const entries = result && result.map(entry => <DictEntry light key={entry.id} entry={entry}/>)
+    const entries = result && result.map(entry => <DictEntryItem light key={entry.id} entry={entry}/>)
 
     return (
         <DictStyle>
             <h3 className="dict_title">Dictionary</h3>
-            {loading ? "Loading..." : entries?.length ? entries : "No result"}
+            {loading ? <Loader light/> : entries?.length ? entries : "No result"}
         </DictStyle>
     );
 };

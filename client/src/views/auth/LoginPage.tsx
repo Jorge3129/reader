@@ -1,42 +1,40 @@
 import MainContent from "../page/MainContent";
 import {useAuth} from "../../hooks/auth/useAuth";
 import {FC} from "react";
-import {Field, Formik, FormikHelpers} from "formik"
-import {LoginValues} from "../../domain/types";
-import {FormStyled} from "./styles";
+import {LoginValues} from "../../models/types";
+import {FormStyled, SubmitButton} from "./styles";
+import {useForm} from 'react-hook-form'
+import Field from "./Field";
 
 const LoginPage: FC<{ title?: string }> = () => {
 
-    const {logIn} = useAuth()
+    const {handleLogin} = useAuth()
 
-    const initialValues = {
+    const defaultValues = {
         email: '',
         password: ''
     }
 
-    const handleSubmit = async (
-        values: LoginValues,
-        {setSubmitting}: FormikHelpers<LoginValues>
-    ) => {
-        const error = await logIn(values);
+    const {register, handleSubmit, formState: {errors}} = useForm<LoginValues>({defaultValues});
+
+    const onSubmit = async (data: LoginValues) => {
+        const error = await handleLogin(data);
         if (error) alert(JSON.stringify(error, null, 2));
-        setSubmitting(false);
     }
 
     return (
         <MainContent title="Login">
-            <Formik
-                initialValues={initialValues}
-                onSubmit={handleSubmit}
-            >
-                <FormStyled>
+            <FormStyled onSubmit={handleSubmit(onSubmit)}>
+                <Field>
                     <label htmlFor="email">Email</label>
-                    <Field id="email" name="email" placeholder="johndoe@gmail.com" type="email"/>
+                    <input {...register("email", {required: true})} placeholder="johndoe@gmail.com"/>
+                </Field>
+                <Field>
                     <label htmlFor="password">Password</label>
-                    <Field id="password" name="password" placeholder="password" type="password"/>
-                    <button type="submit">Submit</button>
-                </FormStyled>
-            </Formik>
+                    <input {...register("password", {required: true})} placeholder="password"/>
+                </Field>
+                <SubmitButton type="submit">Submit</SubmitButton>
+            </FormStyled>
         </MainContent>
     );
 };

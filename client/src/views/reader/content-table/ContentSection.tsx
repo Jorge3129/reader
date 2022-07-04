@@ -1,11 +1,11 @@
 import React, {FC, MouseEvent} from 'react';
-import {ContentTableSection} from "../../../domain/entities/book/books";
-import {sectionIsOpen} from "../../../domain/entities/book/section.utils";
+import {ContentTableSection} from "../../../models/book/books";
+import {sectionIsOpen} from "../../../models/book/section.utils";
 import {useSection} from "../../../hooks/reader/useSection";
 import ContentList from "./ContentList";
 import SectionLink from "./SectionLink";
 import {ContentSectionLi} from "./styles.ContentSectionLi";
-import {isContainerSection, isTextSection} from "../../../domain/entities/book/typeGuards";
+import {isContainerSection, isTextSection} from "../../../models/book/typeGuards";
 import {Chevron} from "../../reusable/icons/Chevron";
 
 interface IProps {
@@ -30,7 +30,7 @@ const ContentSection: FC<IProps> = ({section, path}) => {
         <ContentSectionLi>
             <span className={"section_title text_section" + classList}>
                 <SectionLink className={"content_link"} section={section} step={0}>
-                    {section.title}TEXTs
+                    {section.title}
                 </SectionLink>
             </span>
         </ContentSectionLi>)
@@ -42,7 +42,7 @@ const ContentSection: FC<IProps> = ({section, path}) => {
             <span className={"section_title list_section" + classList} onClick={e => onClick(e, section)}>
                 <Chevron isOpen={isOpen}/>
                 {topLevel && section?.type ? section.type + " " : ""} {
-                section.title} CONTAINER {isOpen+''} sec.path {section.path+''} path {path+''}
+                section.title}
             </span>
             {isOpen && contentSection}
         </ContentSectionLi>

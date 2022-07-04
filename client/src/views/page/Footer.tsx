@@ -16,7 +16,7 @@ export const FooterStyled = styled.footer`
   display: grid;
   place-content: center;
   color: ${props => props.theme.light_color};
-  padding: 1rem;
+  padding: 1rem 0;
 `
 FooterStyled.displayName = 'FooterStyled'
 

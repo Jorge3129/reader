@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {Book, BookDescription} from "../../domain/entities/book/books";
+import {Book, BookDescription} from "../../models/book/books";
 import {TableStyles} from "./styles";
-import {SortOption} from "../../domain/types";
+import {SortOption} from "../../models/types";
 import {StyledLink} from "../reusable/StyledLink";
 import SortAngle from "../reusable/icons/SortAngle";
 import {titleCase} from "../../utils/format/titleCase";
@@ -17,7 +17,7 @@ const fields = ["title", "author", "language", "category", "genre", "type"]
 const BookTable: FC<IProps> = ({books, sort, setSort}) => {
 
     const head =
-        <tr>{fields.map(field =>
+        <tr role="row">{fields.map(field =>
             <th key={field} onClick={e => setSort(field)}>
                 {titleCase(field)}
                 <SortAngle show={sort && sort.prop === field} up={sort?.asc}/>
@@ -30,7 +30,7 @@ const BookTable: FC<IProps> = ({books, sort, setSort}) => {
         </StyledLink>
 
     const rows = books.map(book =>
-        <tr key={book.id}>{fields.map(field =>
+        <tr key={book.id} role="row">{fields.map(field =>
             <td key={book.id + field}>
                 {field === "title"
                     ? titleLink(book)
@@ -39,7 +39,7 @@ const BookTable: FC<IProps> = ({books, sort, setSort}) => {
         </tr>)
 
     return (
-        <TableStyles>
+        <TableStyles role="table">
             <thead>{head}</thead>
             <tbody>{rows}</tbody>
         </TableStyles>

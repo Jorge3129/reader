@@ -57,9 +57,10 @@ export const BookTitleStyle = styled.div`
 export const Close = styled.div`
   position: absolute;
   top: 0;
-  right: -2rem;
+  left: 100%;
   background-color: ${props => props.theme.sidebarBg};
   z-index: 2;
+  font-size: 1.3rem;
   
   &:hover {
     cursor: pointer;

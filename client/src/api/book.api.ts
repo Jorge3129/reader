@@ -1,5 +1,5 @@
 import {BOOK_SERVER_URL} from "../constants/api";
-import {Book, BookDescription, DeepBook, PartialBook, SplitTextSection} from "../domain/entities/book/books";
+import {Book, BookDescription, DeepBook, PartialBook, SplitTextSection} from "../models/book/books";
 import {httpClient} from "./http.client";
 
 const MY_URL = BOOK_SERVER_URL + '/books'

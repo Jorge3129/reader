@@ -6,6 +6,7 @@ import {CopyButton} from "../../reusable/icons/IconButtons";
 import SectionText from "./SectionText";
 import {useKeyNavigation} from "../../../hooks/reader/useKeyNavigation";
 import {useReader} from "../../../hooks/reader/useReader";
+import {splitTextIntoLines} from "../../../utils/text/text.functions";
 
 interface IProps {
 
@@ -15,14 +16,13 @@ const TextContainer: FC<IProps> = () => {
 
     useKeyNavigation()
     const {section} = useReader()
-    const {sectionLines} = useSection()
     const [page, setPage] = useState<number>(0)
     const scrollRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         setPage(0)
         if (scrollRef.current) scrollRef.current.scrollTo({top: 0})
-    }, [sectionLines])
+    }, [section])
 
     const PAGE_SIZE = 50;
     const START = page ? PAGE_SIZE * (page - 1) : 0;
@@ -30,7 +30,7 @@ const TextContainer: FC<IProps> = () => {
 
 
     const sectionLines = useMemo(() => {
-        return section && section.lines
+        return section && splitTextIntoLines(section.textContent)
             .slice(0, END)
     }, [section, page])
 

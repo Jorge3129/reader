@@ -1,5 +1,5 @@
 import React, {FC, PropsWithChildren} from 'react';
-import {ContentTableSection} from "../../../domain/entities/book/books";
+import {ContentTableSection} from "../../../models/book/books";
 import {NavLink, useParams, To} from "react-router-dom";
 import {StyledLink} from "../../reusable/StyledLink";
 

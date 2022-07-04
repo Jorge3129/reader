@@ -1,7 +1,7 @@
 import { useMemo, useState} from "react";
-import {FilterOption, SortOption} from "../../domain/types";
+import {FilterOption, SortOption} from "../../models/types";
 import _ from "lodash"
-import {Book, BookDescription} from "../../domain/entities/book/books";
+import {Book, BookDescription} from "../../models/book/books";
 
 export const useSortFilterBooks = (books: BookDescription[]) => {
     const [sort, setSort] = useState<SortOption>()

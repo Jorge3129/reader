@@ -1,7 +1,7 @@
-import {LoginResponse, LoginValues, WithError} from "../domain/types";
+import {LoginResponse, LoginValues, WithError} from "../models/types";
 import {httpClient} from "./http.client";
 import {BOOK_SERVER_URL} from "../constants/api";
-import {AuthResponse} from "../domain/entities/auth";
+import {AuthResponse} from "../models/auth";
 
 const MY_URL = BOOK_SERVER_URL + "/auth"
 
