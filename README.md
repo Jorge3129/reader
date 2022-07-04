@@ -3,15 +3,6 @@
 
 This is an app to facilitate reading books in foreign languages
 
-See the app live: [https://the-reader-xd.herokuapp.com](https://the-reader-xd.herokuapp.com)
-
-The app server: [https://the-reader-xd-server.herokuapp.com](https://the-reader-xd-server.herokuapp.com)
-
-#### API routes:
-
-GET /books  
-GET /books/:id
-
 ### Scripts
 
 To run the client:
